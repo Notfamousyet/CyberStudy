@@ -60,3 +60,21 @@ Disadvantages of SaaS
 2]You need a stable internet connection to use the service.
 3]If you want to move your data from one SaaS provider to another, it can be difficult.
 
+4)Identity-as-a-Service (IDaaS) is a cloud-based service that helps companies manage user identities and control who can access what systems or data.It is managed by a third-party provider, so businesses don’t need to build their own systems for login and security. This service helps make sure only the right people can access the right data, whether they are working from the office or remotely.
+What Does IDaaS Offer :
+1]One login to access many apps or systems.
+2]Extra layer of security (like a code sent to your phone).
+3]Managing and monitoring user roles, access, and permissions.
+4]Controls who can access what.
+5]Keeps records and detects unusual or risky behavior.
+Examples of IDaaS Providers: OneLogin,Centrify Identity Service,Microsoft Azure Active Directory,Okta
+Advantages of IDaaS
+1]No need to build or manage your own identity system.
+2]Strong authentication methods keep your data safe.
+3]Easier to meet security and privacy laws.
+4]Users log in once to access multiple tools.
+5]Easily manage all user accounts from one place.
+Disadvantages of IDaaS
+1]users may not be able to log in or services may slow down.
+2]If a hacker steals a login, they could access many systems.
+
