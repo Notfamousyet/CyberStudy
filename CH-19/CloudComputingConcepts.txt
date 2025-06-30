@@ -78,3 +78,28 @@ Disadvantages of IDaaS
 1]users may not be able to log in or services may slow down.
 2]If a hacker steals a login, they could access many systems.
 
+5)Security-as-a-Service (SECaaS) is a cloud-based service where security tools and services are provided over the internet.
+Instead of buying expensive equipment or hiring a full security team, businesses can rent security services from expert companies. These services protect their systems, data, and networks without needing any physical hardware.It is based on SaaS (Software-as-a-Service), so everything runs online and is managed by a third party.
+What Does SECaaS Offer:
+Checks if your system can be hacked.
+Makes sure only the right people can log in.
+Watches for suspicious activity or hacking attempts.
+Protects against viruses and harmful software.
+Tracks and manages security threats.
+Examples of SECaaS Providers: eSentire MDR, Switchfast Technologies, OneNeck IT Solutions, Foundstone Managed Security Services
+Advantages of SECaaS:
+1]No need to buy and manage your own security equipment.
+2]Reduces complexity of setting up security systems.
+3]Your systems are protected 24/7.
+4]You get help from professionals who know the latest threats.
+5]Always using the newest and most effective security tools.
+6]Users and devices can be protected fast.
+7]You can scale up or down based on your needs.
+8]Companies can focus on their main goals while security is handled by experts.
+Disadvantages of SECaaS:
+1]Since everything is online, there's a larger area for hackers to attack.
+2]You may not fully know how secure the third-party provider is.
+3]If the connection between your systems and the service is weak, it can be attacked.
+4]Services may not fit perfectly with your company’s specific needs.
+5]If someone steals login details, they could misuse your security tools.
+
