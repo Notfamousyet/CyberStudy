@@ -202,6 +202,21 @@ Disadvantages:
 1]Maintenance and repair costs can be high
 2]Can lead to job losses as machines replace human labor
 
+This table shows who is responsible—the subscriber or the cloud provider—for managing different components of IT infrastructure across On-Premises, IaaS, PaaS, and SaaS cloud service models.
+Subscriber = Managed by the customer/user
+Provider = Managed by the cloud service provider
+| Component       | On-Premises | Infrastructure (IaaS)  | Platform (PaaS)  | Software (SaaS)  |
+|-----------------|-------------|------------------------|------------------|------------------|
+| Applications    | Subscriber  | Subscriber             | Subscriber       | Provider         |
+| Data            | Subscriber  | Subscriber             | Subscriber       | Provider         |
+| Runtime         | Subscriber  | Subscriber             | Provider         | Provider         |
+| Middleware      | Subscriber  | Subscriber             | Provider         | Provider         |
+| O/S             | Subscriber  | Subscriber             | Provider         | Provider         |
+| Virtualization  | Subscriber  | Provider               | Provider         | Provider         |
+| Servers         | Subscriber  | Provider               | Provider         | Provider         |
+| Storage         | Subscriber  | Provider               | Provider         | Provider         |
+| Networking      | Subscriber  | Provider               | Provider         | Provider         |
+
 
 
 
