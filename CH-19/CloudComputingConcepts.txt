@@ -1,0 +1,32 @@
+Cloud computing means using IT services like storage, software, and servers over the internet, instead of owning them. These services are managed by companies like Google, Amazon, and Microsoft at remote locations. Users can access these services on demand and pay only for what they use. Common examples include Gmail, Facebook, Dropbox, and Salesforce.com. This topic covers the basics of cloud computing, types of services, roles and responsibilities, deployment models, NIST reference architecture, cloud storage structure, and major service providers.
+
+Characteristics of Cloud Computing
+1) On-demand self-service
+2) Distributed storage
+3) Rapid elasticity
+4) Automated management
+5) Broad network access
+6) cloud provider shares physical and virtual resources among many users, automatically giving them as needed.
+7) Virtualization lets cloud systems quickly add or remove resources like storage or computing power, which isn't easy in normal setups.
+
+Limitations of Cloud Computing 
+1) Companies have limited control over cloud systems and settings.
+2) Cloud services can go down or face technical problems.
+3) Storing data online can raise privacy and security concerns.
+4) It’s hard to switch providers once you sign a contract.
+5) You must have a stable internet connection to use cloud services.
+6) Being online makes systems more exposed to hackers.
+7) Moving data and apps to another cloud provider can be complicated.
+
+Types of Cloud Computing Services
+1)Infrastructure-as-a-Service (IaaS) is a type of cloud computing service where companies can rent basic IT resources like servers/processing power, Storage (like hard drives) Networking , Virtual machines (software-based computers). Instead of buying and maintaining physical hardware, companies use these resources from cloud providers on demand, like renting space or power only when needed.
+Advantages of IaaS :
+1]You can quickly increase or reduce resources as your needs change.
+2]These services often promise to be available nearly all the time.
+3]Tasks like backups, monitoring, and updates can be automated.
+4]Distributes traffic across servers to keep things running smoothly.
+5]You can set rules (policies) for how the resources should behave (e.g., who can access what).
+6]You can access your services from anywhere in the world using the internet.
+Disadvantages of IaaS :
+1]Since the services are run by third parties and accessed over the internet, they are more open to hacking and security threats.
+2]Sometimes the connection might be slow, or resources may not work as fast as expected.
