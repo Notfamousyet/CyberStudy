@@ -103,3 +103,56 @@ Disadvantages of SECaaS:
 4]Services may not fit perfectly with your company’s specific needs.
 5]If someone steals login details, they could misuse your security tools.
 
+6)Container-as-a-Service (CaaS) is a cloud service that lets developers build, manage, and run container-based applications easily over the internet or in their own data centers.Containers are like small packages that hold your app and everything it needs to run (like code, system tools, libraries), so your app can run the same way anywhere.CaaS helps manage these containers, group them into clusters, and run them reliably and efficiently using cloud platforms or special tools.It’s a mix of both IaaS (infrastructure) and PaaS (platform) features.
+What Does CaaS Provide :
+Tools to run and manage containers.
+Organize and control how containers run.
+Easy ways to control your containers from a browser or program.
+Examples of CaaS Providers: Amazon EC2, Google Kubernetes Engine (GKE)
+Advantages of CaaS:
+01]Developers can build apps quickly using containers.
+02]No need to buy full servers.
+03]Apps are more reliable and work the same on any system.
+04]Containers can move easily between systems without breaking.
+05]No need for big setups or hardware.
+06]Uses fewer system resources.
+07]If one app crashes, others are not affected.
+08]Containers keep apps separate and secure.
+09]Patches and changes can be applied faster.
+10]Easily grow or shrink your app to handle more or fewer users.
+Disadvantages of CaaS:
+1]You need to manage container tools, monitoring, and scaling yourself.
+2]Developers must set up and handle the platform to run containers, which can be tricky.
+
+7)Function-as-a-Service (FaaS) is a cloud service that lets you run small pieces of code (functions) without needing to manage any servers or infrastructure.This is known as **serverless computing**, which means the cloud provider takes care of everything behind the scenes (like servers, scaling, and maintenance). You just write your code, and it runs **only when needed**.
+
+It’s mostly used for **microservices**, where an app is broken into small, independent parts that do specific tasks.
+
+---
+
+### 🔹 **When Does FaaS Run?**
+
+Your code (called a **function**) runs **only when an event triggers it**—like a user clicking a button, a file being uploaded, or a device sending data.
+
+**No event = no function running = no cost.**
+
+---
+
+### 🔹 **What Can FaaS Be Used For?**
+
+* **IoT (Internet of Things):** Handling data from smart devices.
+* **Mobile and web apps:** Running parts of the app in the background.
+* **Batch and stream processing:** Handling large amounts of data in chunks or real-time.
+Examples of FaaS Providers: AWS Lambda, Google Cloud Functions, Microsoft Azure Functions, Oracle Functions
+Advantages of FaaS:
+1]You are charged only when your function runs.
+2]No need to pay for servers or unused resources.
+3]The provider takes care of updates and patches.
+4]Just upload your function — no complex setup required.
+5]It can handle thousands of users without any extra setup.
+Disadvantages of FaaS:
+1]There might be a delay (called "cold start") when a function runs for the first time or after being idle.
+
+
+
+
