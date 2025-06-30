@@ -19,6 +19,7 @@ Limitations of Cloud Computing
 7) Moving data and apps to another cloud provider can be complicated.
 
 Types of Cloud Computing Services
+
 1)Infrastructure-as-a-Service (IaaS) is a type of cloud computing service where companies can rent basic IT resources like servers/processing power, Storage (like hard drives) Networking , Virtual machines (software-based computers). Instead of buying and maintaining physical hardware, companies use these resources from cloud providers on demand, like renting space or power only when needed.
 Advantages of IaaS :
 1]You can quickly increase or reduce resources as your needs change.
@@ -30,3 +31,20 @@ Advantages of IaaS :
 Disadvantages of IaaS :
 1]Since the services are run by third parties and accessed over the internet, they are more open to hacking and security threats.
 2]Sometimes the connection might be slow, or resources may not work as fast as expected.
+
+2)Platform-as-a-Service (PaaS) is a cloud service that gives you a ready-made platform to build and run your own applications.
+you don’t need to worry about buying or managing the servers, storage, operating systems, or software needed to build your app — the cloud provider takes care of all that.
+You just focus on writing and deploying your code, while the platform handles the rest (like setup, scaling, and backups).
+Examples of PaaS Providers: Google App Engine, Salesforce, Microsoft Azure (App Services)
+Advantages of PaaS
+1]No need to set up infrastructure — just upload your code.
+2]Includes built-in tools and services like databases, messaging, and analytics.
+3]More secure than IaaS, since less control means fewer chances of mistakes.
+4]Many developers use it, so help is easy to find.
+5]You pay only for the resources you use.
+6]The system grows with your app automatically.
+Disadvantages of PaaS
+1]Once you use one provider’s tools, it’s hard to switch to another.
+2]Since your app and data are on a third-party server, privacy can be a concern.
+3]Sometimes it's hard to connect your cloud app with other systems you already use.
+
