@@ -217,6 +217,146 @@ Provider = Managed by the cloud service provider
 | Storage         | Subscriber  | Provider               | Provider         | Provider         |
 | Networking      | Subscriber  | Provider               | Provider         | Provider         |
 
+Cloud Deployment Models
+1)A Public Cloud is a type of cloud service where anyone can use the services like storage, servers, or apps through the internet. The cloud provider (like Amazon, Google, or Microsoft) owns and manages everything, including the servers, updates, and security.Users don’t need to worry about installing or maintaining anything — they just connect and use it. You may either pay for what you use, or in some cases, use it for free.
+Examples of Public Cloud Services: Amazon EC2, Google App Engine, Windows Azure, IBM Bluemix
+Advantages of Public Cloud:
+1]You can quickly start using services without setup.
+2]You don’t need to buy or manage hardware.
+3]Restarting or fixing the system is fast when something goes wrong.
+4]The cloud provider takes care of everything.
+5]You can stop using it anytime.
+Disadvantages of Public Cloud:
+1]Since it's open to many users, data may be less secure.
+2]The provider decides how things are managed, not you.
+3]Speed depends on your internet connection; it can be slow if the internet is weak.
+
+2)A Private Cloud is a cloud setup that is used and controlled by only one organization. It’s also called an internal or corporate cloud and is usually hosted within the company’s own firewall (protected network). The organization fully manages it and uses it to keep their data safe and private
+Examples of Private Cloud Platforms: BMC Software, VMware vRealize Suite, SAP Cloud Platform
+Advantages of Private Cloud:
+1]Only one organization uses the cloud, so it’s more protected.
+2]The organization manages and configures everything as needed.
+3]Since it’s within the company’s network, data moves quickly.
+4]You can adjust hardware, storage, and network settings to fit your needs.
+5]Fulfilling rules like HIPAA, PCI DSS, or Sarbanes-Oxley is simpler because everything is under the company’s control.
+Disadvantages of Private Cloud:
+1]Setting up and running your own cloud is expensive.
+2]You need an in-house team to manage and maintain it.
+
+3)A Community Cloud is a cloud setup shared by several organizations that belong to the same group or have similar needs (like healthcare, finance, or government). These organizations share the infrastructure, resources, and costs while making sure their common concerns — like security, performance, and legal rules — are handled properly.It can be managed by the organizations themselves or by a third-party provider, and can be hosted either on-site or off-site.
+Examples of Community Cloud Providers: 
+Cisco Cloud Solutions, Salesforce Health Cloud
+Advantages of Community Cloud:
+1]Resources are shared among organizations, reducing expenses.
+2]Can be customized to fit the community’s specific needs.
+3]Easier to follow industry rules and regulations.
+4]Resources can grow as needed.
+5]Organizations can use resources from anywhere via the internet.
+Disadvantages of Community Cloud :
+1]Users may compete for computing power or storage.
+2]May lead to shortages or overuse.
+3]If something goes wrong, it’s hard to know who is liable.
+4]Other members of the cloud might see or access shared data.
+5]There may be security concerns between organizations using the same system.
+
+4)A Hybrid Cloud is a mix of two or more types of clouds—like private, public, or community—that work together as one system. Even though each cloud is separate, they are connected to share data and services.In this setup, an organization can keep sensitive or critical tasks in a private cloud, and run less important tasks in a public cloud. This allows the company to get the security of private cloud and the scalability of public cloud at the same time.
+Example: A company stores customer records (important data) in a private cloud but runs its company website or email services (less sensitive) on a public cloud.
+Examples of Hybrid Cloud Providers:
+Microsoft Azure, Zymr, Parangat Cloud Computing ,Logicalis
+Advantages of Hybrid Cloud:
+1]Can easily expand using public cloud resources.
+2]Lets you manage costs by using public cloud for non-sensitive work.
+3]Keeps critical data safe in the private cloud.
+4]Allows use of the best features from both public and private clouds.
+Disadvantages of Hybrid Cloud:
+1]Connecting public and private clouds can cause communication problems.
+2]Keeping data rules in check across multiple clouds can be challenging.
+3]If your private cloud fails, you need backup systems to avoid downtime.
+4]Service Level Agreements (SLAs) can be difficult to manage between different cloud providers.
+
+5)A Multi-Cloud is when an organization uses services from more than one cloud provider (like Google Cloud, AWS, Azure, etc.) at the same time. These cloud services can be all public, all private, or a mix of both.It helps companies store and run different apps and data across different cloud platforms, improving performance, flexibility, and reducing risks like data loss or downtime.
+Examples of Multi-Cloud Platforms:
+Microsoft Azure Arc, Google Cloud Anthos
+Advantages of Multi-Cloud:
+1]If one cloud has issues, others can keep running.
+2]Easily adjust resources to meet different business needs.
+3]Choose the best provider for each task to save money and boost speed.
+4]Less likely to fully go down if attacked.
+5]Combines the strength of multiple cloud platforms.
+6]You’re not stuck with one cloud provider.
+Disadvantages of Multi-Cloud:
+1]If clouds don’t work well together, it slows everything down.
+2]Managing the same data across platforms can waste resources.
+3]A bigger system means more places for attackers to target.
+4]It takes more time and effort to handle multiple cloud systems.
+
+6)A Distributed Cloud is a type of cloud system where multiple public or private clouds are spread across different locations, but they are all managed together through a single control system. Even though the cloud services are physically in different places, they work together as one centralized cloud.This allows users to access data and services from anywhere, and it feels like the data is stored locally (near them). It is useful for edge computing, meaning it brings computing power closer to where it's needed, which helps with data privacy, faster processing, and following local laws.
+Examples: Google Distributed Cloud, Cloudflare CDN
+Advantages of Distributed Cloud:
+1]Fast data access and processing.
+2]Shorter wait times for data to travel.
+3]Easier to manage than hybrid or multi-cloud systems.
+4]Brings modern cloud tech to on-site locations.
+5]Moves computing closer to the user for faster and safer results.
+6]Data can be processed on-site instead of in a faraway data center.
+7]Supports local security and privacy laws.
+8]Great for advanced tech like AI, ML, and IoT.
+Disadvantages of Distributed Cloud:
+1]More points in the network can lead to more vulnerabilities.
+2]Setting up infrastructure in many locations can be expensive.
+3]Not all software tools may be ready for distributed cloud systems.
+4]Troubleshooting can be harder due to spread-out systems.
+
+7)A Poly Cloud is a cloud model that combines features from multiple cloud providers into one platform. Unlike a multi-cloud (where different clouds are used for different tasks), a poly cloud lets users choose specific features from each cloud service and use them together in one environment.This means businesses can pick and use the best tools or services (like AI, ML, or analytics) from different clouds such as Google Cloud Platform (GCP) or Amazon Web Services (AWS) to meet their needs more effectively.
+Advantages of Poly Cloud:
+1]Users can choose and mix the best features from different providers.
+2]Choose services based on business needs.
+3]Optimizes how the infrastructure is used, improving investment returns.
+4]Offers advanced and specialized tools for automation.
+5]Saves money by only using needed services.
+6]Uses top-performing services from different clouds.
+Disadvantages of Poly Cloud:
+1]Initial setup can be slow and complex.
+2]No standard toolset makes management harder.
+3]Needs a lot of research and planning before starting.
+4]May be too expensive for startups or small businesses.
+5]Every setup is different, so it lacks a standard structure.
+
+
+NIST Cloud Deployment Reference Architecture
+
+The NIST (National Institute of Standards and Technology) cloud reference architecture explains the key roles and responsibilities of people and systems in cloud computing. It helps organizations understand how cloud systems work and interact with each other. It defines five main actors:
+1. Cloud Consumer
+A person or business that uses cloud services from a cloud provider.
+They select and request services, agree to a service contract (SLA), and pay based on usage.
+Services used by cloud consumers:
+PaaS: Database, app development, testing, integration, business intelligence.
+IaaS: Storage, platform hosting, backup, recovery, content delivery (CDN), computing.
+SaaS: HR, ERP, CRM, email, office tools, finance, document and content management, social networks.
+2. Cloud Provider (CSP)
+A company or person that owns and manages cloud infrastructure (like servers, storage, etc.).
+Provides services either directly to users or through a broker.
+Must meet the terms of the SLA, including service quality, security, and performance.
+3. Cloud Carrier
+Acts like the middleman that provides the network connection between the consumer and provider.
+Examples: Internet service providers, telecom operators.
+Ensures cloud services can be accessed via networks or devices.
+4. Cloud Auditor
+An independent party that checks and verifies whether a cloud provider is doing things correctly.
+Reviews security, privacy, compliance, and performance.
+Makes sure cloud services follow laws, standards, and contracts.
+5. Cloud Broker
+A middle agent that helps cloud consumers by:
+Finding, combining, or managing services from one or more providers.
+Making cloud use simpler and more efficient for users.
+Cloud Broker Services:
+Adds features or enhances cloud services (like better security or billing).
+Combines many services into one new, complete offering.
+Chooses the best service options from different providers dynamically.
+
+
+
+
 
 
 
