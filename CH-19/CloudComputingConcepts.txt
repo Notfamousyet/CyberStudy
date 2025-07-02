@@ -460,7 +460,7 @@ Used in:
  Autonomous vehicles
  Manufacturing plants
 
-Comparison: Cloud vs Fog vs Edge Computing
+Cloud vs Fog vs Edge Computing
 
 | Feature              | Cloud Computing                          | Fog Computing                                | Edge Computing                                |
 | -------------------- |----------------------------------------  | -------------------------------------------- |---------------------------------------------  |
@@ -470,6 +470,40 @@ Comparison: Cloud vs Fog vs Edge Computing
 |  Scalability         | Highly scalable (central resources)      | Scalable via multiple fog nodes              | Limited to the number of edge devices         |
 |  Best for            | Bulk data processing, storage, analytics | IoT systems with moderate speed requirements | Real-time tasks (e.g., robots, sensors, etc.) |
 |  Examples            | Google Cloud, AWS                        | Cisco Fog, HPE Edgeline                      | Smart thermostats, factory machines           |
+
+| Feature          | Cloud Computing                                              | Fog Computing                                  |   Edge Computing                             |
+| ---------------- | ------------------------------------------------------------ | ---------------------------------------------- | -------------------------------------------- |
+| Speed            | Higher access speed than fog, but depends on VM connectivity | Higher speed than cloud computing              | Higher speed than fog computing              |
+| Latency          | High latency                                                 | Low latency                                    | Low latency                                  |
+| Data Integration | Integrates multiple data sources                             | Integrates multiple data sources and devices   | Integrates limited data sources              |
+| Capacity         | No data reduction while delivering or converting data        | Reduces amount of data sent to cloud computing | Reduces amount of data sent to fog computing |
+| Responsiveness   | Low response time                                            | High response time                             | High response time                           |
+| Security         | Less secure than fog computing                               | Highly secure                                  | Customized security                          |
+
+Here's the comparison between Cloud Computing and Grid Computing:
+
+| Feature             | Cloud Computing                                              | Grid Computing                                               |
+| ------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Architecture        | Follows client–server architecture                           | Follows distributed computing architecture                   |
+| Scalability         | Higher scalability                                           | Standard scalability                                         |
+| Resource Usage      | Resources are used in a centralized way                      | Resources are used collaboratively                           |
+| Flexibility         | More flexible                                                | Less flexible                                                |
+| Ownership           | Infrastructure providers own the cloud servers               | An organization owns and manages the grids                   |
+| Services Provided   | Includes IaaS, PaaS, SaaS                                    | Includes distributed computing/information/pervasive systems |
+| Access Method       | Accessed via regular web protocols                           | Accessed via grid middleware                                 |
+| Cost Model          | Pay-as-you-go                                                | No usage cost to users                                       |
+| Service Orientation | Service-oriented                                             | Application-oriented                                         |
+| Resource Allocation | Provides custom resource levels to different users           | Provides shared resource pool for all users                  |
+| Interoperability    | Does not support interoperability (can cause vendor lock-in) | Supports interoperability and easier to manage               |
+| Resource Pool Size  | Contains a large-scale pool of resources and assets          | Contains a limited number of assets and resources            |
+
+| Cloud Provider              | Website                                            | Services Offered                                              | Key Features                                                                                           |
+| --------------------------- | -------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Amazon Web Services (AWS)   | [aws.amazon.com](https://aws.amazon.com)           | On-demand cloud services (pay-per-use), distributed computing | Offers CPU, GPU, RAM, storage, OS, apps, networking tools (e.g., web servers, databases, CRM)          |
+| Microsoft Azure             | [azure.microsoft.com](https://azure.microsoft.com) | SaaS, PaaS, IaaS                                              | Services include computing, mobile storage, data management, media, messaging, ML, IoT                 |
+| Google Cloud Platform (GCP) | [cloud.google.com](https://cloud.google.com)       | IaaS, PaaS, serverless computing                              | Offers data storage, analytics, ML, networking, big data, cloud AI, APIs, security, IoT                |
+| IBM Cloud                   | [ibm.com](https://www.ibm.com)                     | IaaS, SaaS, PaaS via public, private, and hybrid models       | Provides AI tools, analytics, IoT, Dev tools, mobile, storage, blockchain, and deep industry solutions |
+
 
 
 
