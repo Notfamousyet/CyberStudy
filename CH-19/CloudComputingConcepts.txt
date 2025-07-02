@@ -380,7 +380,7 @@ Amazon S3, Microsoft Azure Storage, Oracle Cloud Storage, OpenStack Swift
 
 Role of AI in Cloud Computing
 
-Cloud computing is now smarter because **Artificial Intelligence (AI) and Machine Learning (ML) are being added to it. This combination makes cloud services more efficient, cost-saving, secure, and helpful for businesses.
+Cloud computing is now smarter because Artificial Intelligence (AI) and Machine Learning (ML) are being added to it. This combination makes cloud services more efficient, cost-saving, secure, and helpful for businesses.
 Here’s a simple breakdown of how AI improves cloud computing:
 1]Self-Managed Cloud
 AI automates tasks like monitoring, managing servers, and solving issues.
