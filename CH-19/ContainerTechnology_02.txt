@@ -1,0 +1,77 @@
+What is Container Technology?
+Container technology is a new and powerful way for developers and IT teams to build, run, and manage software. It uses a type of virtualization where applications are packed with everything they need (like files, libraries, and settings) into a container. These containers can run smoothly on any system – whether it’s your own server or in the cloud – without compatibility problems.
+Developers can use a web interface or API to manage these containers. They can deploy them either in their company’s own data centers (on-premises) or over the cloud. This whole system is called CaaS (Container-as-a-Service), which combines benefits of both IaaS and PaaS.
+What is a Container?
+A container is like a lightweight box that holds an app and all the parts it needs to work (like libraries, files, and settings). This box can be moved anywhere, and it will still work the same. This makes it easier to develop, test, and run applications.
+Examples of Container Services: Docker, Amazon AWS EC2, Google Kubernetes Engine (GKE)
+Features of Containers:
+1]Portability and Consistency
+ You can run the same container on different machines and cloud platforms without any problem.
+ Everything needed to run the app is inside the container, so it behaves the same everywhere.
+2]Security
+ Containers run separately from each other.
+ If one container is attacked or crashes, the others stay safe.
+3]Efficiency and Cost-Effectiveness
+ Containers use fewer resources than full virtual machines.
+ They don’t need their own operating systems, which saves memory and power.
+ Multiple containers can run on the same server easily.
+4]Scalability
+ You can easily add more containers if your app needs to handle more users.
+ You can also stop unused containers to save money.
+5]Robustness
+ Containers can be created, launched, or deleted in seconds.
+ This makes software updates and bug fixes very fast.
+ It speeds up app performance and lets developers release new features quickly.
+
+Container Technology Architecture
+Container technology helps developers create, manage, and run applications easily and efficiently by packaging everything the app needs into a container.
+5 Tiers (Layers) of the Architecture
+1] Tier-1: Developer Machines
+Developers create images of their apps here.
+These images are tested to make sure they work correctly.
+Security teams approve or accredit these images.
+2] Tier-2: Testing and Accreditation Systems
+These systems double-check the image content.
+If everything is fine, they sign the images (like a stamp of approval).
+Then, they send these signed images to a storage area called registries.
+3]Tier-3: Registries
+This is like a library where all approved container images are stored.
+Developers or teams can download, tag, and version the images from here.
+Examples: Docker Hub, Amazon ECR.
+4]Tier-4: Orchestrators
+These are tools that turn container images into running containers.
+They also manage how and where containers run.
+Examples: Kubernetes, Docker Swarm.
+5]Tier-5: Hosts
+These are the machines (physical or virtual) where containers actually run.
+They follow instructions from the orchestrator and manage the containers.
+
+3 Phases of Container Lifecycle
+1]Image Creation, Testing & Accreditation
+Developers build app images.
+These are tested and checked by security teams.
+The final image is ready to be stored and used.
+2]Image Storage & Retrieval
+The image is sent to a registry (a central storage area).
+From here, the image can be easily searched, tagged, downloaded, or shared.
+3]Container Deployment & Management
+Orchestrators take images from the registry.
+They run the containers and manage them (like scaling, restarting if needed).
+When an app update is needed, the old container is deleted and a new one is created from the updated image.
+Advantages (Benefits)
+1]Needs very few resources to build apps.
+2]Fixing bugs and deploying updates is fast.
+3]Easy and cheap to ship apps to any environment.
+4]Apps can be moved easily between systems.
+5]You can scale up or down based on need.
+6]Containers start quickly, saving time.
+7]Apps run separately, so they don’t interfere.
+8]Easier to test and debug.
+Disadvantages (Drawbacks)
+1]Can be complex to manage.
+2]If team lacks skills, they may misconfigure it.
+3]Shared resources increase security risks.
+4]Container apps may show performance issues.
+5]It’s hard to choose the right platform to run containers.
+6]Different service discovery methods may confuse things (e.g., DNS vs proxy).
+
