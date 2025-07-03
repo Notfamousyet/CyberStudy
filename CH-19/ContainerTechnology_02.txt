@@ -116,14 +116,8 @@ With Docker Swarm, you can:
 4]Keep the app running even if one container or computer fails
 5]Update all containers easily when needed
 
-Here is the full explanation in **simple words** and **without bold text**, written in a detailed but easy-to-understand format:
-
----
-
-**Docker Architecture (Simple Explanation)**
-
+Docker Architecture 
 Docker works using a client-server model. It has several parts like:
-
 * the host (the machine where Docker runs),
 * the client (which sends commands),
 * the network (for communication),
@@ -131,11 +125,7 @@ Docker works using a client-server model. It has several parts like:
 * storage units (like volumes).
 
 The Docker client is what users interact with. It sends commands to the Docker daemon (also called "dockerd"). The daemon is responsible for creating, running, and managing containers.
-
 The client and daemon can run on the same machine, or the client can connect to a daemon on a different machine over the internet or local network. They communicate using something called a REST API, which helps them send and receive instructions in a standard way.
-
----
-
 Main Components of Docker Architecture
 1]docker daemon
    The Docker daemon is a background program (dockerd) that listens for instructions from the client.
@@ -178,11 +168,10 @@ Downloading (pulling) a new image from Docker Hub or another registry.
 Uploading (pushing) your local image to Docker Hub or another registry so others can use it.
 Searching for available images on Docker Hub.
 
-Microservices vs Docker (Simple Explanation)
+Microservices vs Docker
 Traditionally, software applications were built as one big unit. These are called monolithic applications.
 Microservices break the big application into smaller parts. Each part is responsible for doing one specific job. These parts, or microservices, work together to make the full application function. This makes the system more flexible and easier to manage.
 Microservices are often packaged in Docker containers. Each microservice has its own container with everything it needs to work (code, libraries, settings). Because each microservice runs in its own container, you can use different programming languages and tools for each one. They also store their data separately, unlike monolithic apps which use one large database.
-
 
 Docker Networking
 Docker allows containers to talk to each other and connect with the outside world. Whether you're using Linux or Windows, Docker manages networking in a way that works across platforms.
@@ -190,7 +179,6 @@ Docker networking is based on a system called the Container Network Model (CNM).
 Sandbox: This controls how a container connects to the network, including its settings like routes and DNS (which helps find other computers).
 Endpoint: This is the connection point that links a container to a network.
 Network: This is a group of endpoints that can talk to each other. If an endpoint isn’t connected to a network, it can’t communicate.
-
 To manage networks better, CNM uses two types of drivers (software that manages how something works):
 1]Network Drivers – These control how containers connect. Docker has built-in drivers:
  Host: The container uses the host computer’s network directly.
@@ -225,32 +213,30 @@ What is Kubernetes?
 Kubernetes (often called K8s) is an open-source tool made by Google. It helps manage containers and microservices (small pieces of a big application). Kubernetes makes sure containers are running smoothly, and if something goes wrong, it fixes it automatically.
 Containers make it easy to package and run apps. But when you use many containers (especially in real-time apps), you need a smart system to manage them. That’s where Kubernetes helps. It keeps apps running with little to no downtime.
 Kubernetes provides the following features:
-Service discovery: It lets other parts of the system find a service using a name or IP address.
-Load balancing: If one container gets too much traffic, Kubernetes shares the load with others.
-Storage orchestration: It lets you use different types of storage (your computer or cloud storage).
-Automated rollouts and rollbacks: It updates your application automatically. If something goes wrong, it can undo the changes.
-Automatic bin packing: It places containers on servers based on available resources like memory and CPU.
-Self-healing: It checks if containers are healthy. If not, it restarts or replaces them automatically.
-Secret and configuration management: It stores private data like passwords and keys safely. You can update these without restarting or changing the whole container.
-
+1]Service discovery: It lets other parts of the system find a service using a name or IP address.
+2]Load balancing: If one container gets too much traffic, Kubernetes shares the load with others.
+3]Storage orchestration: It lets you use different types of storage (your computer or cloud storage).
+4]Automated rollouts and rollbacks: It updates your application automatically. If something goes wrong, it can undo the changes.
+5]Automatic bin packing: It places containers on servers based on available resources like memory and CPU.
+6]Self-healing: It checks if containers are healthy. If not, it restarts or replaces them automatically.
+8]Secret and configuration management: It stores private data like passwords and keys safely. You can update these without restarting or changing the whole container.
 Kubernetes Cluster Architecture
 When Kubernetes is set up, it creates a cluster, which is a group of connected computers (called nodes) that run your applications inside containers.
 The cluster has two main types of nodes:
-1. Master Node – This controls everything and manages the cluster.
-2. Worker Nodes – These run your applications inside units called pods (a pod is a group of one or more containers).
+1]Master Node – This controls everything and manages the cluster.
+2]Worker Nodes – These run your applications inside units called pods (a pod is a group of one or more containers).
 Master Node Components
-he master node acts like the brain of the cluster. It keeps everything organized, running, and updated. It has the following important parts:
-Kube-apiserver: This is like the front desk. It takes all requests (like asking to start or stop something) and sends them to the right place. It’s the only part that talks to the database (etcd).
-Etcd cluster: This is the database for Kubernetes. It stores all the important information like what’s running, service details, and cluster settings.
-Kube-scheduler: This is the part that finds a home for each pod. It decides on which worker node a pod should run, based on how much memory or CPU is available, where the data is, and other factors.
-Kube-controller-manager: This part runs many small programs called controllers. These controllers make sure things in the cluster are working as they should. For example, if a pod crashes, a controller will try to restart it.
-Cloud-controller-manager: If you are using a cloud platform (like AWS or Azure), this part helps Kubernetes connect and work with those cloud services.
-
+The master node acts like the brain of the cluster. It keeps everything organized, running, and updated. It has the following important parts:
+1]Kube-apiserver: This is like the front desk. It takes all requests (like asking to start or stop something) and sends them to the right place. It’s the only part that talks to the database (etcd).
+2]Etcd cluster: This is the database for Kubernetes. It stores all the important information like what’s running, service details, and cluster settings.
+3]Kube-scheduler: This is the part that finds a home for each pod. It decides on which worker node a pod should run, based on how much memory or CPU is available, where the data is, and other factors.
+4]Kube-controller-manager: This part runs many small programs called controllers. These controllers make sure things in the cluster are working as they should. For example, if a pod crashes, a controller will try to restart it.
+5]Cloud-controller-manager: If you are using a cloud platform (like AWS or Azure), this part helps Kubernetes connect and work with those cloud services.
 Worker Node (Node Components)
 Each worker node runs the actual applications in pods. These nodes have three important parts:
-Kubelet: This is the main agent on a node. It makes sure the containers in the pod are running properly and keeps them healthy. It only watches over containers created by Kubernetes.
-Kube-proxy: This helps manage the networking for pods. It makes sure the pods can talk to each other and to the outside world by managing network rules.
-Container Runtime: This is the actual software that runs containers. Kubernetes supports different runtimes like Docker, containerd, cri-o, etc.
+1]Kubelet: This is the main agent on a node. It makes sure the containers in the pod are running properly and keeps them healthy. It only watches over containers created by Kubernetes.
+2]Kube-proxy: This helps manage the networking for pods. It makes sure the pods can talk to each other and to the outside world by managing network rules.
+3]Container Runtime: This is the actual software that runs containers. Kubernetes supports different runtimes like Docker, containerd, cri-o, etc.
 In short, the master manages the cluster, and the worker nodes run the apps. The master makes sure everything is in the right place and working correctly, while the workers handle the real work of running your apps.
 
 Kubernetes vs Docker
@@ -268,11 +254,10 @@ Types of clusters:
 1]Failover/High Availability (HA): If one node stops working, another takes over so there’s no downtime.
 2]Load Balancing: Spreads the work across all nodes to avoid overload.
 3]High Performance Computing (HPC): Uses many nodes to finish big tasks very fast.
-Cloud Clusters: Clusters that run in the cloud. You can add more virtual machines (VMs) when needed. It is easy to upgrade, and it can be more reliable and secure.
+4]Cloud Clusters: Clusters that run in the cloud. You can add more virtual machines (VMs) when needed. It is easy to upgrade, and it can be more reliable and secure.
 
 Containers and Clusters
 Containers help run parts of an app (like frontend or backend) in different environments without problems. You can run containers on a virtual machine. But if that VM crashes, the app stops working. To avoid this, containers are placed on multiple nodes in a cluster. This way, if one node fails, others are still running the app. This setup makes apps more available, faster, and reliable.
-
 Container Security Challenges
 While containers are useful, they also come with security risks. Here are the main problems:
 * Vulnerable Code: Developers may use code from unknown sources. These may have bugs or security issues.
@@ -357,7 +342,7 @@ Advantages of Serverless Computing:
 2]Fast deployment – You can update or launch apps quickly.
 3]No need to manage servers – The cloud provider handles it.
 4]Pay only when used – No charges if your code doesn’t run.
-5Less cost – You don’t pay for idle server time.
+5]Less cost – You don’t pay for idle server time.
 6]Lower chance of failure – The cloud adjusts automatically if problems happen.
 7]No system admin needed – No need to manage infrastructure.
 8]Quick resource allocation – It provides computing power immediately.
