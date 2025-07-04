@@ -1,0 +1,55 @@
+What is Serverless Computing?
+
+Serverless computing is a way to build and run applications without having to manage the servers yourself.
+Even though the name says "serverless", servers are still used — but you don’t have to worry about setting them up or maintaining them. Instead, the cloud provider (like AWS, Azure, or Google Cloud) takes care of everything:
+1]Starting and stopping the server
+2]Managing security
+3]Handling traffic and load
+4]Scaling resources when needed
+5]Applying updates and patches
+6]This allows developers to just focus on writing the code, not managing the servers.
+It is also called: FaaS – Function as a Service, Serverless architecture
+How it Works:
+You write code and upload it to the cloud.
+The cloud runs your code only when needed.
+You only pay for the time your code runs (not for idle time).
+The cloud provider takes care of everything behind the scenes.
+Advantages of Serverless Computing:
+1]Highly scalable – It can easily handle more users or more work.
+2]Fast deployment – You can update or launch apps quickly.
+3]No need to manage servers – The cloud provider handles it.
+4]Pay only when used – No charges if your code doesn’t run.
+5]Less cost – You don’t pay for idle server time.
+6]Lower chance of failure – The cloud adjusts automatically if problems happen.
+7]No system admin needed – No need to manage infrastructure.
+8]Quick resource allocation – It provides computing power immediately.
+Disadvantages of Serverless Computing:
+1]Security issues – More things are handled by the provider, so security can be complex.
+2]Vendor lock-in – It’s hard to move to another provider once you start.
+3]Hard to keep data in memory – Serverless functions are stateless (they don’t remember past data).
+4]Testing is difficult – End-to-end testing can be complicated.
+5]Not good for long processes – Functions should run quickly; long-running tasks are not suitable
+
+| Feature                | Containers                                                                   | Serverless Computing                                                |
+| ---------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Setup                  | Developer sets up everything: OS, software, libraries, and files.            | Developer only writes code; cloud provider sets up everything else. |
+| Deployment             | Developer builds an image, uploads it to a registry, and runs the container. | Developer uploads the code directly; cloud handles deployment.      |
+| Execution Time         | Runs continuously until the developer stops it.                              | Runs only when needed; stops automatically after execution.         |
+| Server Use             | Needs a server running all the time, even if idle.                           | No server runs in the background when not in use.                   |
+| Timeout                | No time limit on code execution.                                             | Has a time limit; functions stop after a fixed time.                |
+| Infrastructure Control | Developer controls the environment and infrastructure.                       | Infrastructure is hidden; managed by the cloud provider.            |
+| Storage                | Uses temporary or attached volumes for data.                                 | Uses cloud object storage (like AWS S3) for saving data.            |
+| Application Type       | Good for both complex applications and small services.                       | Best for small tasks or microservices.                              |
+| Programming Language   | Developer can choose any language and runtime.                               | Limited language choices set by the cloud provider.                 |
+| Billing                | May be billed even when idle.                                                | Only charged when the function runs (pay-per-use).                  |
+
+Serverless Computing Frameworks
+
+|   Provider   | Platform                       | Description                                                                        |
+| ------------ | ------------------------------ | ---------------------------------------------------------------------------------- |
+| Microsoft    | Azure Functions                | Runs code without managing servers. Automatically scales based on workload.        |
+| Amazon       | AWS Lambda                     | Serverless platform that executes code in response to triggers or events.          |
+| Google       | Google Cloud Functions         | Lightweight serverless functions that respond to events from Google Cloud or HTTP. |
+| IBM          | IBM Cloud Functions            | Based on Apache OpenWhisk, it runs code in response to events and HTTP calls.      |
+| Amazon       | AWS Fargate                    | Serverless compute engine for containers; no need to manage servers.               |
+| Alibaba      | Alibaba Cloud Function Compute | Runs code in response to events without the need for managing infrastructure.      |
