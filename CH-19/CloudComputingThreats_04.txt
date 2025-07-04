@@ -1,0 +1,30 @@
+OWASP Top 10 Cloud Security Risks
+
+| Risk Code     | Title                                    | Description                                                                                   |
+| ------------- | ---------------------------------------- | --------------------------------------------------------------------------------------------- |
+| R1            | Accountability and Data Ownership        | Cloud use may result in a loss of control over data. Difficult to ensure data recoverability. |
+| R2            | User Identity Federation                 | Multiple cloud platforms lead to multiple user identities. Hard to manage user lifecycle.     |
+| R3            | Regulatory Compliance                    | Following laws across countries is difficult. Data security varies by location.               |
+| R4            | Business Continuity and Resiliency       | Poor handling by cloud providers may lead to service disruptions or data loss.                |
+| R5            | User Privacy and Secondary Usage of Data | Social platforms may misuse user data. Sharing settings can leak private info.                |
+| R6            | Service and Data Integration             | Data in transit to the cloud can be intercepted if not secured properly.                      |
+| R7            | Multi-Tenancy and Physical Security      | Shared cloud resources may lack proper isolation, leading to cross-tenant interference.       |
+| R8            | Incident Analysis and Forensic Support   | Investigating cloud incidents is hard due to distributed logs and data across countries.      |
+| R9            | Infrastructure Security                  | Misconfigured systems expose networks to scanning, default settings, and vulnerabilities.     |
+| R10           | Non-Production Environment Exposure      | Development/test environments can be insecure and prone to unauthorized access.               |
+
+OWASP Top 10 Serverless Security Risks
+
+| Risk                                             | How Attack Happens                                                                   | Weakness in the System                                   | Possible Damage                                                   |
+| ------------------------------------------------ | ------------------------------------------------------------------------------------ | -------------------------------------------------------- | ----------------------------------------------------------------- |
+| A1 - Injection                                   | Attackers send bad input from emails, databases, or cloud events to trick functions. | Weak input checks let attackers insert harmful code.     | Can delete or corrupt data if the function has high access.       |
+| A2 - Broken Authentication                       | Hackers send fake emails or use open APIs to run functions.                          | Poor control over who can run the functions.             | Leaks data, breaks app logic, and changes how the app works.      |
+| A3 - Sensitive Data Exposure                     | Data is stolen during transfer or from storage like S3 or DynamoDB.                  | Storing data in plain text or with weak encryption.      | Leaks personal data, health info, passwords, credit card numbers. |
+| A4 - XML External Entities (XXE)                 | Function uses XML in a wrong way, allowing attackers to read hidden files.           | Using unsafe XML tools.                                  | Can leak function code or other private info.                     |
+| A5 - Broken Access Control                       | Hackers use over-permissioned functions to access things they shouldn't.             | Giving functions more access than they need.             | Can steal or delete files from cloud storage or database.         |
+| A6 - Security Misconfiguration                   | Poor settings like long timeouts or low limits let attackers overload systems.       | Functions are misconfigured or not updated.              | May lead to data leaks, slowdowns, or unauthorized access.        |
+| A7 - Cross-Site Scripting (XSS)                  | Bad input from logs or emails runs in the app as code.                               | App doesn't clean inputs properly.                       | Lets hackers act like users and steal sensitive data.             |
+| A8 - Insecure Deserialization                    | Attackers use tricky data formats to run bad code.                                   | Functions accept untrusted data in formats like JSON.    | May let hackers run their own code or steal data.                 |
+| A9 - Using Components with Known Vulnerabilities | Functions use old or unsafe libraries that have known flaws.                         | Not checking for updates or safe versions of components. | Can be exploited easily if known bugs are not fixed.              |
+| A10 - Insufficient Logging and Monitoring        | Attacks go unnoticed because there’s no proper logging.                              | Weak tracking of function actions.                       | Makes it hard to detect or understand attacks quickly.            |
+
