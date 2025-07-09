@@ -28,459 +28,253 @@ OWASP Top 10 Serverless Security Risks
 | A9 - Using Components with Known Vulnerabilities | Functions use old or unsafe libraries that have known flaws.                         | Not checking for updates or safe versions of components. | Can be exploited easily if known bugs are not fixed.              |
 | A10 - Insufficient Logging and Monitoring        | Attacks go unnoticed because there’s no proper logging.                              | Weak tracking of function actions.                       | Makes it hard to detect or understand attacks quickly.            |
 
-Here's a **simplified explanation** of all the **Cloud Computing Threats** and their **countermeasures** in easy-to-understand language:
-
----
-
-### 🛡️ **Cloud Computing Threats – Explained Simply**
-
----
-
-#### 1. **Data Breach or Loss**
-
-* **What it means**: Someone may access, steal, or delete your data if the system isn’t secure.
-* **Why it happens**: Weak security, stolen passwords, or poor data handling.
-* **Fix it with**:
-
-  * Encrypt your data (while stored and in use).
-  * Use strong passwords and multi-factor login.
-  * Back up your data regularly.
-  * Monitor and limit access to sensitive files.
-  * Use tools that prevent unauthorized data sharing (like CASBs or DLP).
-
----
-
-#### 2. **Abuse of Cloud Services**
-
-* **What it means**: Hackers use cloud accounts for illegal activities (like sending spam or hacking).
-* **Why it happens**: Anyone can easily sign up for cloud services without checks.
-* **Fix it with**:
-
-  * Use strong sign-up and identity verification.
-  * Monitor user traffic for suspicious behavior.
-  * Block bad IP addresses.
-  * Work with secure cloud providers.
-
----
-
-#### 3. **Insecure APIs and Interfaces**
-
-* **What it means**: Interfaces (like buttons, dashboards, or coding tools) that control cloud systems might be weak and unsafe.
-* **Why it happens**: Bad coding, reused passwords, and no encryption.
-* **Fix it with**:
-
-  * Secure logins and access control.
-  * Encrypt all data going in and out.
-  * Never reuse API keys or tokens.
-  * Use tools to check if your APIs are safe.
-
----
-
-#### 4. **Insufficient Due Diligence**
-
-* **What it means**: Not fully understanding what the cloud provider does or doesn’t protect.
-* **Why it happens**: Lack of planning or asking the wrong questions.
-* **Fix it with**:
-
-  * Learn everything about your provider’s security setup.
-  * Make sure employees know cloud security basics.
-  * Check incident handling, disaster recovery, and who is responsible for what.
-
----
-
-#### 5. **Shared Technology Risks**
-
-* **What it means**: Cloud providers use shared hardware. If one customer’s app is weak, others may get affected.
-* **Why it happens**: Poor isolation between customers.
-* **Fix it with**:
-
-  * Regular security updates and patches.
-  * Scan and monitor systems for threats.
-  * Use firewalls to separate customer data.
-
----
-
-#### 6. **Unknown Risk Profile**
-
-* **What it means**: You don’t know what’s going on inside the cloud system (like who patched what).
-* **Why it happens**: Cloud users don’t control the full system.
-* **Fix it with**:
-
-  * Ask for logs and reports from your provider.
-  * Request transparency on security practices.
-
----
-
-#### 7. **Unsynchronized Clocks**
-
-* **What it means**: Different servers having different times can mess up logs, backups, and transactions.
-* **Fix it with**:
-
-  * Use tools like **NTP (Network Time Protocol)** to sync time.
-  * Keep time servers inside your secure network.
-
----
-
-#### 8. **Poor Infrastructure Planning**
-
-* **What it means**: The cloud provider can’t handle sudden increases in user demand.
-* **Fix it with**:
-
-  * Plan based on expected use.
-  * Ensure your provider has backup plans and enough resources.
-
----
-
-#### 9. **Conflicts with Security Settings**
-
-* **What it means**: Your company’s security settings may not work with your cloud provider’s system.
-* **Fix it with**:
-
-  * Clearly define roles and security boundaries.
-  * Test and review both your and the provider’s security setups.
-
----
-
-#### 10. **Loss of Logs**
-
-* **What it means**: Losing logs (records of activity) makes it hard to investigate problems or attacks.
-* **Fix it with**:
-
-  * Secure and backup log files.
-  * Limit who can access or delete logs.
-  * Set up centralized log storage.
-
----
-
-#### 11. **Malicious Insiders**
-
-* **What it means**: Employees or contractors who misuse their access for personal gain.
-* **Fix it with**:
-
-  * Run background checks and set clear rules.
-  * Monitor insider activity.
-  * Define clear incident response plans.
-
----
-
-#### 12. **Illegal Access**
-
-* **What it means**: Hackers break into cloud accounts due to weak passwords or access settings.
-* **Fix it with**:
-
-  * Strong password policies and two-factor authentication.
-  * Review the cloud provider’s security regularly.
-
----
-
-#### 13. **Reputation Damage from Other Users (Co-Tenants)**
-
-* **What it means**: If a hacker uses the same cloud provider (in a shared space), your service might be blamed too.
-* **Fix it with**:
-
-  * Choose reliable cloud providers.
-  * Ask how they isolate and protect tenant data.
-
----
-
-#### 14. **Privilege Escalation**
-
-* **What it means**: Someone gains more access than they’re supposed to (like admin rights).
-* **Fix it with**:
-
-  * Regularly audit user roles and permissions.
-  * Keep software up to date.
-  * Monitor suspicious behavior.
-
----
-
-#### 15. **Natural Disasters**
-
-* **What it means**: Earthquakes, floods, etc. can take down cloud services.
-* **Fix it with**:
-
-  * Store data in multiple locations.
-  * Prepare a disaster recovery plan.
-
----
-
-#### 16. **Hardware Failures**
-
-* **What it means**: Failure in disks, servers, routers causes data loss or app crashes.
-* **Fix it with**:
-
-  * Have backup hardware ready.
-  * Backup data regularly and automatically.
-  * Build systems that keep running even if one part fails.
-
----
-
-#### 17. **Supply Chain Failures**
-
-* **What it means**: If your cloud provider’s partners fail, your service could suffer.
-* **Fix it with**:
-
-  * Monitor all suppliers.
-  * Use blockchain or digital signatures for safe transactions.
-  * Have backup partners ready.
-
----
-
-#### 18. **Network Traffic Modification**
-
-* **What it means**: Hackers change or listen to your network traffic to steal data.
-* **Fix it with**:
-
-  * Analyze and monitor all network traffic regularly.
-
----
-
-#### 19. **Isolation Failures**
-
-* **What it means**: One customer’s app may affect others due to weak separation.
-* **Fix it with**:
-
-  * Keep user data and network traffic separate with strong isolation settings.
-
----
-
-#### 20. **Cloud Provider Acquisition**
-
-* **What it means**: If your cloud provider is bought by another company, your data or services may be at risk.
-* **Fix it with**:
-
-  * Work with trusted providers.
-  * Review agreements and service levels carefully.
-
----
-
-#### 21. **Management Interface Compromise**
-
-* **What it means**: Hackers get into the admin panel of cloud systems.
-* **Fix it with**:
-
-  * Use secure web protocols.
-  * Isolate admin interfaces from public access.
-  * Patch systems regularly.
-
----
-
-#### 22. **Network Mismanagement**
-
-* **What it means**: Bad network settings lead to slow or unsafe connections.
-* **Fix it with**:
-
-  * Monitor networks closely.
-  * Use VPNs and secure design.
-  * Keep systems updated.
-
----
-
-#### 23. **Authentication Attacks**
-
-* **What it means**: Weak login systems can be bypassed.
-* **Fix it with**:
-
-  * Use strong, unique passwords and two-factor authentication.
-  * Limit user access and monitor logins.
-
----
-
-#### 24. **VM-Level Attacks**
-
-* **What it means**: Attacks on virtual machines (VMs) through weak hypervisors.
-* **Fix it with**:
-
-  * Use secure and updated hypervisors.
-  * Employ intrusion detection systems.
-  * Avoid sharing hardware between users.
-
----
-
-#### 25. **Vendor Lock-in**
-
-* **What it means**: You can’t easily switch to another cloud provider.
-* **Fix it with**:
-
-  * Use standard formats and APIs.
-  * Plan for migration from day one.
-  * Use multiple cloud providers if possible.
-
----
-Here is a **simplified, easy-to-read version** of the **remaining cloud computing threats** and their **countermeasures** in plain language:
-
----
-
-### ☁️ **More Cloud Computing Threats – Explained Simply**
-
----
-
-#### 1. **Licensing Risks**
-
-* **What it means**: You may end up paying more than necessary for software licenses in the cloud.
-* **Why it happens**: Hidden fees, duplicate licenses, or unclear terms.
-* **Fix it with**:
-
-  * Review your cloud provider’s licensing model.
-  * Use one platform to manage software licenses and costs.
-  * Remove unused cloud resources.
-
----
-
-#### 2. **Loss of Governance**
-
-* **What it means**: When using cloud services, you give up some control, which might hurt your security and performance.
-* **Fix it with**:
-
-  * Make clear agreements with the cloud provider (SLAs).
-  * Set strong rules for managing data and performance.
-  * Use the same governance standards for cloud and in-house systems.
-  * Automate compliance checks.
-
----
-
-#### 3. **Loss of Encryption Keys**
-
-* **What it means**: Losing the key means losing access to your data or letting attackers in.
-* **Fix it with**:
-
-  * Never store keys near the encrypted data.
-  * Use strong encryption methods like AES and RSA.
-  * Use role-based access to key stores.
-  * Backup keys securely.
-  * Don’t reuse encryption keys.
-  * Use **Hardware Security Modules (HSMs)**.
-
----
-
-#### 4. **Jurisdiction Risks**
-
-* **What it means**: Your data may be stored in countries with weak legal protections.
-* **Fix it with**:
-
-  * Learn where your data is stored and understand the local laws and risks.
-
----
-
-#### 5. **Malicious Probes or Scans**
-
-* **What it means**: Hackers try to gather information to plan an attack.
-* **Fix it with**:
-
-  * Use firewalls and intrusion detection systems.
-  * Separate admin (hypervisor) traffic from user traffic using VLANs.
-  * Don’t allow ping or traceroute replies from sensitive areas.
-
----
-
-#### 6. **Theft of Computer Equipment**
-
-* **What it means**: Physical theft of servers, disks, or other equipment leads to data loss.
-* **Fix it with**:
-
-  * Use security guards, CCTV, alarms, and smart ID access.
-  * Lock server rooms.
-  * Use biometric authentication.
-  * Store backups in safe, off-site places.
-  * Use rack-mounted servers for extra security.
-
----
-
-#### 7. **Cloud Service Termination or Failure**
-
-* **What it means**: The cloud provider shuts down, taking your data with it.
-* **Fix it with**:
-
-  * Make sure the provider has a clear data return and deletion process.
-  * Add legal protection in service agreements.
-  * Ensure secure deletion of data after termination.
-
----
-
-#### 8. **Subpoena and E-Discovery**
-
-* **What it means**: Your data can be legally accessed or seized by government or third parties.
-* **Fix it with**:
-
-  * Choose a trusted cloud provider.
-  * Review all legal and privacy terms in the agreement.
-  * Create an eDiscovery plan.
-  * Plan an exit strategy.
-
----
-
-#### 9. **Improper Data Disposal**
-
-* **What it means**: Data isn't truly deleted from servers and may be recovered.
-* **Fix it with**:
-
-  * Encrypt data so it’s useless even if not deleted.
-  * Use VPNs for safe deletion processes.
-  * Set time limits for data storage and apply secure deletion.
-  * Document and standardize all deletion steps.
-
----
-
-#### 10. **Loss or Tampering of Backup Data**
-
-* **What it means**: Attackers may delete or alter your backup data.
-* **Fix it with**:
-
-  * Use reliable data recovery tools.
-  * Don’t rely on one backup—use the **3-2-1 rule**:
-
-    * 3 copies of data
-    * 2 different storage types
-    * 1 copy off-site
-
----
-
-#### 11. **Compliance Risks**
-
-* **What it means**: Your cloud provider doesn’t meet legal or industry security standards.
-* **Fix it with**:
-
-  * Ensure your data stays protected.
-  * Review your provider’s audit processes.
-
----
-
-#### 12. **Economic Denial of Sustainability (EDoS)**
-
-* **What it means**: An attacker racks up your cloud costs using fake traffic or tasks.
-* **Fix it with**:
-
-  * Use services that detect and stop such attacks (scrubber services).
-  * Use puzzle-based protections to slow attackers.
-
----
-
-#### 13. **Lack of Security Architecture**
-
-* **What it means**: Moving to the cloud without a strong security plan opens the door to attacks.
-* **Fix it with**:
-
-  * Build a security plan before moving to the cloud.
-  * Regularly update it.
-  * Perform security assessments.
-
----
-
-#### 14. **Account Hijacking**
-
-* **What it means**: If hackers get into your cloud account, they can steal or damage everything.
-* **Fix it with**:
-
-  * Give users only what access they need.
-  * Use identity and access management (IAM).
-  * Use multi-factor authentication.
-  * Remove old or unused accounts.
-  * Use password managers.
-  * Encrypt sensitive information.
-
----
-
- Common Container Vulnerabilities in Cloud Computing
+Cloud Computing Threats
+
+1] Data Breach or Loss
+What it means: Someone may access, steal, or delete your data if the system isn’t secure.
+Why it happens: Weak security, stolen passwords, or poor data handling.
+Fix it with:
+ Encrypt your data (while stored and in use).
+ Use strong passwords and multi-factor login.
+ Back up your data regularly.
+ Monitor and limit access to sensitive files.
+ Use tools that prevent unauthorized data sharing (like CASBs or DLP).
+2] Abuse of Cloud Services
+What it means: Hackers use cloud accounts for illegal activities (like sending spam or hacking).
+Why it happens: Anyone can easily sign up for cloud services without checks.
+Fix it with:
+ Use strong sign-up and identity verification.
+ Monitor user traffic for suspicious behavior.
+ Block bad IP addresses.
+ Work with secure cloud providers.
+3] Insecure APIs and Interfaces
+What it means: Interfaces (like buttons, dashboards, or coding tools) that control cloud systems might be weak and unsafe.
+Why it happens: Bad coding, reused passwords, and no encryption.
+Fix it with:
+ Secure logins and access control.
+ Encrypt all data going in and out.
+ Never reuse API keys or tokens.
+ Use tools to check if your APIs are safe.
+4] Insufficient Due Diligence
+What it means: Not fully understanding what the cloud provider does or doesn’t protect.
+Why it happens: Lack of planning or asking the wrong questions.
+Fix it with:
+ Learn everything about your provider’s security setup.
+ Make sure employees know cloud security basics.
+ Check incident handling, disaster recovery, and who is responsible for what.
+5] Shared Technology Risks
+What it means: Cloud providers use shared hardware. If one customer’s app is weak, others may get affected.
+Why it happens: Poor isolation between customers.
+Fix it with:
+ Regular security updates and patches.
+ Scan and monitor systems for threats.
+ Use firewalls to separate customer data.
+6] Unknown Risk Profile
+What it means: You don’t know what’s going on inside the cloud system (like who patched what).
+Why it happens: Cloud users don’t control the full system.
+Fix it with:
+ Ask for logs and reports from your provider.
+ Request transparency on security practices.
+7] Unsynchronized Clocks
+What it means: Different servers having different times can mess up logs, backups, and transactions.
+Fix it with:
+ Use tools like NTP (Network Time Protocol) to sync time.
+ Keep time servers inside your secure network.
+8] Poor Infrastructure Planning
+What it means: The cloud provider can’t handle sudden increases in user demand.
+Fix it with:
+ Plan based on expected use.
+ Ensure your provider has backup plans and enough resources.
+9] Conflicts with Security Settings
+What it means: Your company’s security settings may not work with your cloud provider’s system.
+Fix it with:
+ Clearly define roles and security boundaries.
+ Test and review both your and the provider’s security setups.
+10] Loss of Logs
+What it means: Losing logs (records of activity) makes it hard to investigate problems or attacks.
+Fix it with:
+ Secure and backup log files.
+ Limit who can access or delete logs.
+ Set up centralized log storage.
+11] Malicious Insiders
+What it means: Employees or contractors who misuse their access for personal gain.
+Fix it with:
+ Run background checks and set clear rules.
+ Monitor insider activity.
+ Define clear incident response plans.
+12] Illegal Access
+What it means: Hackers break into cloud accounts due to weak passwords or access settings.
+Fix it with:
+ Strong password policies and two-factor authentication.
+ Review the cloud provider’s security regularly.
+13] Reputation Damage from Other Users (Co-Tenants)
+What it means: If a hacker uses the same cloud provider (in a shared space), your service might be blamed too.
+Fix it with:
+ Choose reliable cloud providers.
+ Ask how they isolate and protect tenant data.
+14] Privilege Escalation
+What it means: Someone gains more access than they’re supposed to (like admin rights).
+Fix it with:
+ Regularly audit user roles and permissions.
+ Keep software up to date.
+ Monitor suspicious behavior.
+15] Natural Disasters
+What it means: Earthquakes, floods, etc. can take down cloud services.
+Fix it with:
+ Store data in multiple locations.
+ Prepare a disaster recovery plan.
+16] Hardware Failures
+What it means: Failure in disks, servers, routers causes data loss or app crashes.
+Fix it with:
+ Have backup hardware ready.
+ Backup data regularly and automatically.
+ Build systems that keep running even if one part fails.
+17] Supply Chain Failures
+What it means: If your cloud provider’s partners fail, your service could suffer.
+Fix it with:
+ Monitor all suppliers.
+ Use blockchain or digital signatures for safe transactions.
+ Have backup partners ready.
+18] Network Traffic Modification
+What it means: Hackers change or listen to your network traffic to steal data.
+Fix it with:
+ Analyze and monitor all network traffic regularly.
+19] Isolation Failures
+What it means: One customer’s app may affect others due to weak separation.
+Fix it with:
+ Keep user data and network traffic separate with strong isolation settings.
+20] Cloud Provider Acquisition
+What it means: If your cloud provider is bought by another company, your data or services may be at risk.
+Fix it with:
+ Work with trusted providers.
+ Review agreements and service levels carefully.
+21] Management Interface Compromise
+What it means: Hackers get into the admin panel of cloud systems.
+Fix it with:
+ Use secure web protocols.
+ Isolate admin interfaces from public access.
+ Patch systems regularly.
+22] Network Mismanagement
+What it means: Bad network settings lead to slow or unsafe connections.
+Fix it with:
+ Monitor networks closely.
+ Use VPNs and secure design.
+ Keep systems updated.
+23] Authentication Attacks
+What it means: Weak login systems can be bypassed.
+Fix it with:
+ Use strong, unique passwords and two-factor authentication.
+ Limit user access and monitor logins.
+24] VM-Level Attacks
+What it means: Attacks on virtual machines (VMs) through weak hypervisors.
+Fix it with:
+ Use secure and updated hypervisors.
+ Employ intrusion detection systems.
+ Avoid sharing hardware between users.
+25] Vendor Lock-in
+What it means: You can’t easily switch to another cloud provider.
+Fix it with:
+ Use standard formats and APIs.
+ Plan for migration from day one.
+ Use multiple cloud providers if possible.
+
+☁️ More Cloud Computing Threats ☁️
+1] Licensing Risks
+What it means: You may end up paying more than necessary for software licenses in the cloud.
+Why it happens: Hidden fees, duplicate licenses, or unclear terms.
+Fix it with:
+ Review your cloud provider’s licensing model.
+ Use one platform to manage software licenses and costs.
+ Remove unused cloud resources.
+2] Loss of Governance
+What it means: When using cloud services, you give up some control, which might hurt your security and performance.
+Fix it with:
+ Make clear agreements with the cloud provider (SLAs).
+ Set strong rules for managing data and performance.
+ Use the same governance standards for cloud and in-house systems.
+ Automate compliance checks.
+3] Loss of Encryption Keys
+What it means: Losing the key means losing access to your data or letting attackers in.
+Fix it with:
+ Never store keys near the encrypted data.
+ Use strong encryption methods like AES and RSA.
+ Use role-based access to key stores.
+ Backup keys securely.
+ Don’t reuse encryption keys.
+ Use Hardware Security Modules (HSMs).
+4] Jurisdiction Risks
+What it means: Your data may be stored in countries with weak legal protections.
+Fix it with:
+ Learn where your data is stored and understand the local laws and risks.
+5] Malicious Probes or Scans
+What it means: Hackers try to gather information to plan an attack.
+Fix it with:
+ Use firewalls and intrusion detection systems.
+ Separate admin (hypervisor) traffic from user traffic using VLANs.
+ Don’t allow ping or traceroute replies from sensitive areas.
+6] Theft of Computer Equipment
+What it means: Physical theft of servers, disks, or other equipment leads to data loss.
+Fix it with:
+ Use security guards, CCTV, alarms, and smart ID access.
+ Lock server rooms.
+ Use biometric authentication.
+ Store backups in safe, off-site places.
+ Use rack-mounted servers for extra security.
+7] Cloud Service Termination or Failure**
+What it means: The cloud provider shuts down, taking your data with it.
+Fix it with:
+ Make sure the provider has a clear data return and deletion process.
+ Add legal protection in service agreements.
+ Ensure secure deletion of data after termination.
+8] Subpoena and E-Discovery
+What it means: Your data can be legally accessed or seized by government or third parties.
+Fix it with:
+ Choose a trusted cloud provider.
+ Review all legal and privacy terms in the agreement.
+ Create an eDiscovery plan.
+ Plan an exit strategy.
+9. Improper Data Disposal
+What it means: Data isn't truly deleted from servers and may be recovered.
+Fix it with:
+ Encrypt data so it’s useless even if not deleted.
+ Use VPNs for safe deletion processes.
+ Set time limits for data storage and apply secure deletion.
+ Document and standardize all deletion steps.
+10] Loss or Tampering of Backup Data
+What it means: Attackers may delete or alter your backup data.
+Fix it with:
+ Use reliable data recovery tools.
+ Don’t rely on one backup—use the 3-2-1 rule:
+ 3. copies of data
+ 2. different storage types
+ 1. copy off-site
+11] Compliance Risks
+What it means: Your cloud provider doesn’t meet legal or industry security standards.
+Fix it with:
+ Ensure your data stays protected.
+ Review your provider’s audit processes.
+12] Economic Denial of Sustainability (EDoS)
+What it means: An attacker racks up your cloud costs using fake traffic or tasks.
+Fix it with:
+ Use services that detect and stop such attacks (scrubber services).
+ Use puzzle-based protections to slow attackers.
+13] Lack of Security Architecture
+What it means: Moving to the cloud without a strong security plan opens the door to attacks.
+Fix it with:
+ Build a security plan before moving to the cloud.
+ Regularly update it.
+ Perform security assessments.
+14] Account Hijacking
+What it means: If hackers get into your cloud account, they can steal or damage everything.
+Fix it with:
+ Give users only what access they need.
+ Use identity and access management (IAM).
+ Use multi-factor authentication.
+ Remove old or unused accounts.
+ Use password managers.
+ Encrypt sensitive information.
+
+Common Container Vulnerabilities in Cloud Computing
 
 | **#** | **Vulnerability**                          | **What it Means (Simple Explanation)**                                                                    |
 | ----- | ------------------------------------------ | --------------------------------------------------------------------------------------------------------- |
