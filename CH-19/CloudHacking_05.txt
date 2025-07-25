@@ -1,0 +1,242 @@
+✦What is Cloud Hacking?
+Many companies today store their important data and run their business applications on the cloud (like Google Cloud, AWS, or Microsoft Azure) because it’s cheaper, more flexible, and easily accessible. However, this also comes with security risks. Cloud hacking means when attackers break into cloud systems by finding weak points (called vulnerabilities) in the technology or security settings. Once inside, they can steal data, block access, or even take full control of services.
+Since a lot of sensitive data — like personal info, business secrets, and financial records — is now stored in the cloud, hacking it can cause huge damage to both individuals and companies. People may lose trust in cloud services if their data is not safe.
+Why Do Attackers Hack the Cloud?
+Attackers can benefit in several ways:
+1. Stealing Important Data
+If a company doesn’t use strong security, hackers can steal private or sensitive information, such as passwords, credit card details, or business documents. This is called data exfiltration.
+2. Accessing Apps Without Permission
+Attackers can break into cloud-based apps (like email, CRM, storage tools) without having proper authorization. This helps them spy, steal, or change data.
+3. Stealing Login Credentials
+Sometimes, attackers trick legitimate users or take advantage of weak security to get their usernames and passwords, and then use these to log in as someone else.
+4. Illegal Crypto Mining
+Hackers can secretly use a company’s cloud systems (which have strong computers) to mine cryptocurrency (like Bitcoin). This is like stealing someone else’s electricity and computers to make money.
+5. Spreading Crypto-Mining Malware
+They may also install hidden malware (malicious software) that keeps generating cryptocurrency without anyone knowing. This drains system resources and slows everything down.
+6. Denial-of-Service (DoS) Attacks
+Hackers can flood a cloud system with so many fake requests that real users can’t access it anymore. This can bring down websites or apps, causing losses and frustration.
+7. Changing Cloud Settings
+Some attackers exploit weak points in how tokens or synchronization systems work. Tokens are like digital keys that grant access. By misusing them, attackers can change important settings in cloud services.
+8. Lateral Movement & Network Control
+Once inside the cloud, hackers may move from one part of the network to another, looking for more data or systems to control. They may also manipulate network traffic to spy or redirect information.
+Why It Matters :-
+ Cloud hacking isn’t just about stealing data. It can lead to business downtime, lost trust, legal issues, and huge financial damage.
+ Companies must build strong security to protect cloud resources — like using strong passwords, multi-factor authentication, encryption, and continuous monitoring.
+ Understanding how attackers work helps in preventing these attacks.
+
+✦Container Vulnerability Scanning Using Trivy
+What Are Containers?
+Containers are lightweight, standalone packages that include everything an application needs to run:
+ Operating System (OS)
+ Application code
+ Runtime (like Python, Node.js)
+ Libraries and dependencies
+Because they are reused across environments, developers often pull container images (like from DockerHub), which might include open-source packages with known security vulnerabilities.
+If attackers find these vulnerabilities, they can:
+ Gain unauthorized access
+ Take control of the container engine
+ Affect the entire cloud infrastructure
+What Is Trivy?
+Trivy is a free and automated tool used to scan container images for vulnerabilities.
+Features:
+ Just provide the image name, and Trivy will start scanning.
+ Detects:
+  OS-level vulnerabilities in systems like:
+     Alpine Linux
+     Red Hat Enterprise Linux (RHEL)
+     CentOS
+  Application-level vulnerabilities in dependencies from:
+    Bundler (Ruby)
+    Composer (PHP)
+    npm, yarn (JavaScript)
+ Source:
+    [Trivy GitHub Repository](https://github.com)
+
+✦Kubernetes Vulnerability Scanning Using Sysdig
+What Is Kubernetes?
+Kubernetes is a platform used to orchestrate and manage containers. It handles scaling, deploying, and running apps in containers. But it’s also complex, and misconfigurations often create security holes.
+These misconfigurations can be exploited by attackers to:
+ Break into clusters
+ Escalate privileges
+ Access confidential data
+What Is Sysdig?
+Sysdig is a security tool used to scan Kubernetes clusters for vulnerabilities.
+ Features:
+  Integrates with DevOps pipelines (CI/CD) to secure the software from the start.
+  Connects with:
+   Image registries (like DockerHub, ECR)
+   Kubernetes Admission Controllers (used to approve or reject deployments)
+  Scans images before they run in Kubernetes
+  Creates a detailed inventory of everything inside your containers
+  Continuously checks for new CVEs (Common Vulnerabilities and Exposures)
+ Source:
+    [Sysdig Official Website](https://sysdig.com)
+Other Kubernetes Vulnerability Scanning Tools
+Besides Sysdig, here are some other tools used to scan and detect Kubernetes security issues:
+| Tool        | Description                                              | Source                                                |
+| ------------| -------------------------------------------------------- | ----------------------------------------------------- |
+| Pipeline    | Used to integrate security into CI/CD processes          | [Pipeline by BanzaiCloud](https://banzaicloud.com)    |
+| kube-hunter | Finds security issues in live Kubernetes clusters        | [GitHub](https://github.com/aquasecurity/kube-hunter) |
+| Kube-Scan   | Provides risk scoring for Kubernetes workloads           | [GitHub](https://github.com/octarinesec/kube-scan)    |
+| Kubesec     | Scans Kubernetes resource definitions (like YAML files)  | [Kubesec](https://kubesec.io)                         |
+| KubiScan    | Identifies risky RBAC permissions in Kubernetes clusters | [GitHub](https://github.com/cyberark/KubiScan)        |
+
+✦What is Amazon S3?
+Amazon S3 (Simple Storage Service) is a cloud-based storage service provided by AWS (Amazon Web Services). It allows users to:
+ Store files like PDFs, images, videos, and documents
+ Access them using the internet via APIs or web links
+ Organize the data in something called a "bucket" — like folders that must have unique names
+ Why S3 Buckets Are Targeted?
+  Sometimes, people make mistakes in the security settings (called misconfigurations) while creating or managing S3 buckets. This can make the bucket:
+   Publicly accessible without permission
+   Vulnerable to data theft
+   Exploitable— attackers may inject malware or malicious scripts if the session remains open
+   Attackers try to find out the bucket name and URL, then test its settings to see if they can break in or exploit the content.
+ Techniques Attackers Use to Enumerate (Find and Test) S3 Buckets:
+ 1]Inspecting HTML Source Code
+ When attackers view the HTML source code of a website, they may find links pointing to an S3 bucket.
+ These links might look like:
+  `https://s3.amazonaws.com/my-bucket-name/file.png`
+ If the bucket name is exposed, attackers test it for misconfigurations.
+ 2]Brute-Forcing the Bucket URL
+ S3 bucket URLs follow a pattern like:
+  `http://s3.amazonaws.com/[bucket_name]`
+ If attackers don’t know the exact name, they use brute-force tools to try many names until they find a valid one.
+ Tool Example: Burp Suite (Burp Intruder)
+ 3]Finding Subdomains
+ Sometimes, buckets are linked to subdomains like:
+  `mybucket.mycompany.com`
+ Attackers use tools to discover these subdomains, which may reveal bucket names.
+ Tools:OWASP, AmassRobtex
+ 4]Reverse IP Search
+ Attackers use search engines like Bing to find domains that are hosted on the same IP address.
+ They use special search commands like:
+  `ip:<target IP address>`
+ This might reveal other S3 bucket-related domains linked to the same company.
+ 5]Advanced Google Hacking (Google Dorking)
+ Google Dorking is using smart search queries to find hidden or forgotten files on the internet.
+ Attackers use the `inurl:` operator in Google to find S3 URLs.
+ Common search examples:
+   `inurl:s3.amazonaws.com`
+   `inurl:s3.amazonaws.com/audio/`
+   `inurl:s3.amazonaws.com/video/`
+   `inurl:s3.amazonaws.com/backup/`
+   `inurl:s3.amazonaws.com/movie/`
+   `inurl:s3.amazonaws.com/image/`
+ These dorks can expose sensitive or personal files unintentionally left open.
+What Happens If Attackers Succeed?
+ 6]Identifying Open S3 Buckets using S3Scanner 
+ What is S3Scanner? :- S3Scanner is a tool that hackers use to search for and access open (publicly exposed) S3 buckets.
+  With S3Scanner, attackers can:
+  See what's stored in the buckets (files, folders, etc.)
+  Check who has permission to read or write
+  Even download the contents if the bucket allows it
+ Example Commands Using S3Scanner
+ 1)Scan multiple S3 buckets using a list and 8 threads:
+   s3scanner --threads 8 scan --buckets-file ./bucket-names.txt
+   This checks many buckets at once from a list (`bucket-names.txt`) using 8 parallel processes (to make it faster).
+ 2)Download contents of a specific bucket:
+   s3scanner dump --bucket my-bucket-to-dump
+   This will try to download all files from the bucket named `my-bucket-to-dump`.
+ 7]Enumerating AWS Account IDs
+ What is an AWS account ID? :- It’s a unique number (like an ID card) given to every AWS account. This ID should stay private.
+ But sometimes these IDs leak by accident, such as:
+  In error messages from AWS
+  On code-sharing sites like GitHub
+  In screenshots shared online
+  In public database backups (RDS snapshots)
+  In public storage disks (EBS snapshots)
+  In public machine images (AMIs)
+  When people post them online while asking for tech support
+ Once attackers get this ID, they may:
+  Look for more resources linked to that AWS account (like users, roles, storage)
+  Try to assume roles in that account (to gain access)
+  Try to run functions (like AWS Lambda) that belong to the account
+ 8]IAM Role Enumeration (Finding AWS IAM Roles)
+ What are IAM Roles? :- IAM roles in AWS are like temporary access passes that allow someone (a user or service) to perform certain tasks, like accessing a file or running a program.
+ What do attackers do?
+  Attackers try to guess IAM role names by sending role-assumption requests to AWS. Based on the error messages AWS sends back, they can figure out:
+   Whether a role exists or not
+   Even if they can’t access the role, they know it’s there
+   For example:
+    If a role exists but the attacker doesn’t have permission, AWS shows a specific error.
+    If a role doesn’t exist, AWS shows a different error.
+   This difference helps attackers confirm valid roles.
+ What information do attackers gather?
+  Names of internal tools or services (like “devops-stack”)
+  IAM usernames (which can be used in social engineering attacks)
+  AWS services that the company is using
+  3rd-party tools being used (e.g., Datadog, Okta, CloudSploit)
+ Why is this dangerous?
+  Once they find open or weak IAM roles, attackers can steal credentials and gain unauthorized access to cloud resources.
+ 9]S3 Bucket Permission Enumeration Using S3Inspector
+ What is S3Inspector? :- S3Inspector is a tool attackers use to **check whether S3 buckets are public or private.**
+ What does it do?
+ If a bucket is public, S3Inspector shows:
+   Who can access it
+   URLs of files stored inside
+ If the bucket is not public, the tool will return access denied
+ Why is this dangerous?
+ Public S3 buckets can expose:
+  Private data
+  Images, videos, text files
+  Credentials or backups
+  Attackers use this information for data theft or blackmail.
+ 10]Enumerating Kubernetes etcd Database
+ What is etcd?
+  In Kubernetes, `etcd` is a key-value database used to store all cluster-related information: Configuration data, Secrets (like passwords), Service details, Access info
+  It's basically the heart of a Kubernetes cluster.
+ What do attackers do?
+  They try to locate and access the etcd server by:
+   Checking for etcd processes and config files
+   Scanning open ports (like port 2379, which etcd uses)
+  Running commands like:
+  ps -ef | grep apiserver
+  Once they find etcd, they can try to access sensitive info using commands like:
+   bash
+   ETCDCTL_API=3 ./etcdctl --cacert=... --cert=... --key=... --endpoints=https://127.0.0.1:2379 get /registry/ --prefix | grep '/registry/secrets/'
+ What do attackers get?
+  Certificates and private keys
+  Secrets stored in the cluster
+  Tokens used to access services
+  YAML files with configuration Why is this dangerous?
+ If attackers access etcd:
+  It’s like getting admin/root access to the entire Kubernetes cluster
+  They can escalate privileges, move to other nodes, and even take over the system
+ 11]Enumerating Azure AD Accounts
+ What is Azure AD? :- Azure Active Directory (AD) is Microsoft’s cloud-based identity service. It is used by many organizations to manage user accounts, logins, emails (Office 365), and access to other services. Because services like Office 365 are accessible from the internet, attackers can target them easily.
+ 1)Account Enumeration
+ What is it? :- Account enumeration is when attackers try to find out which user accounts exist in an Azure AD system.
+ Tool Used: Azucar
+  Source: [Azucar GitHub](https://github.com)
+  Azucar is a security tool that helps users (or attackers) scan Azure environments.
+  It is multi-threaded (fast) and can:
+   Check for user accounts
+   Identify admin groups
+   Assess security misconfigurations
+ It’s a read-only tool — it gathers info but doesn’t harm the environment directly.
+ Why is this dangerous?
+  Identify real users and admins
+  Plan further attacks like phishing or brute-force attacks using known usernames
+ 2)Password Spraying
+ What is Password Spraying? :- Instead of trying many passwords on one account (which would trigger lockouts), attackers try one common password on many accounts.
+ This helps them:
+  Avoid account lockouts
+  Increase chances of breaking into an account that uses a weak or common password
+ Tool Used: Ruler
+  Source: [Ruler GitHub](https://github.com)
+  Ruler is a tool that lets attackers interact with Exchange servers (like those used in Office 365).
+ It can use protocols like:
+   RPC/HTTP
+   Messaging Application Programming Interface (MAPI)
+
+
+
+page 2018
+
+
+
+
+
+
+

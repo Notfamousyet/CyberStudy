@@ -528,12 +528,178 @@ Countermeasures:
  Check the referrer header.
  Use anti-CSRF tokens.
 
-12. DNS Attacks
-The attacker targets the DNS system to redirect users to fake websites and steal their login info.
+12. Domain Name System (DNS) Attacks
+The Domain Name System (DNS) changes easy-to-remember website names (like `www.google.com`) into IP addresses that computers use to communicate.
+What is a DNS Attack?
+Attackers manipulate DNS servers to trick users into visiting fake websites, stealing passwords, or redirecting traffic for spying or fraud.
+Types of DNS Attacks
+| Type                            | Description                                                                                           |
+| ------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| DNS Poisoning / Cache Poisoning | Fake IP is stored in the DNS server. Users are redirected to a spoofed (fake) website.                |
+| Cybersquatting                  | Attacker registers similar domain names (like `g00gle.com`) to fool users and steal data.             |
+| Domain Hijacking                | Attacker steals a real domain name by compromising the domain registrar account.                      |
+| Domain Snipping                 | Attacker buys expired domain names (maybe with past traffic), and uses them to run scams or phishing. |
+Example – DNS Poisoning Attack Steps
+1]User types `www.xCloud.com`.
+2]Internal DNS server asks the real cloud DNS for the correct IP.
+3]Attacker intercepts this request.
+4]Attacker sends a fake IP (of a fake website) to the internal DNS server.
+5]The DNS server stores (caches) the fake IP.
+6]Now, users are redirected to the fake site automatically.
 Countermeasures:
- Use DNSSEC (DNS Security Extensions).
- Monitor for suspicious DNS traffic.
- Don’t click unknown or suspicious links.
+ Use DNSSEC (Domain Name System Security Extensions) – adds authentication to DNS data.
+ Regularly monitor and patch DNS servers.
+ Train users to check URLs before entering sensitive info.
+
+13. SQL Injection Attacks (SQLi)
+SQL (Structured Query Language) is used to interact with databases (to get, insert, delete, or update data).
+What is an SQL Injection?
+Attackers insert malicious SQL code into an input field (like a login form) to:
+ Access unauthorized data
+ Modify or delete records
+ Take control of the web server
+ Run dangerous commands remotely
+Example – SQL Injection Steps
+1]User visits a cloud web app (e.g., login form).
+2]Attacker types a malicious input, like:
+
+   ```
+   ' OR '1'='1
+   ```
+3]This tricks the database into thinking the login is valid.
+4]Attacker gets unauthorized access to sensitive data stored on the cloud.
+Countermeasures:
+ Sanitize user inputs (filter out dangerous characters).
+ Validate length, type, format, and range of input.
+ Use prepared statements instead of dynamic SQL.
+ Regularly patch web servers and apps.
+ Implement WAF (Web Application Firewall) and Intrusion Prevention Systems (IPS).
+ Use database monitoring tools to detect unusual behavior.
+
+14. Cryptanalysis Attacks
+Cryptanalysis attacks involve breaking or bypassing encryption used to protect data stored in the cloud.
+Even if the data is encrypted, attackers might still read or guess it if:
+ The encryption algorithm is weak or outdated
+ There are flaws in how it's implemented (e.g., weak random number generation)
+ Attackers can analyze patterns of data access and queries to guess sensitive info
+Real-World Risk:
+ Confidential data becomes readable by unauthorized users.
+ Attackers can predict encryption keys or steal credentials if encryption is weak.
+Countermeasures:
+ Use strong encryption algorithms like AES, RSA, etc.
+ Ensure random numbers used in keys are secure (use cryptographic RNGs).
+ Avoid outdated or broken algorithms (like MD5, SHA-1).
+ Apply salting and hashing to passwords and sensitive data.
+
+15. Denial of Service (DoS) / Distributed DoS (DDoS)
+These attacks are done to make cloud services slow or unavailable by overloading them with fake requests or traffic.
+ In DoS, a single system attacks a server.
+ In DDoS, many systems (a botnet) attack together, flooding the system.
+How it happens:
+1] Attacker sends a huge number of requests to a cloud server.
+2] The server uses all its CPU, memory, bandwidth to handle these fake requests.
+3] Legitimate users are denied access because the system is too busy.
+Real-World Risk:
+ Business disruption
+ Financial loss
+ Service outage
+ Customer dissatisfaction
+Countermeasures:
+ Use IDS (Intrusion Detection Systems) on all cloud servers.
+ Apply least privilege access control for users and apps.
+ Set rate limits for traffic.
+ Use load balancers and traffic filters.
+ Partner with DDoS protection services like Cloudflare or AWS Shield.
+
+16. Man-in-the-Browser (MitB) Attacks
+This is a type of malware attack on the browser. Attackers infect the user's browser with a bot or malicious code that steals login details and performs unauthorized actions in real time.
+How it happens:
+1] User's browser is infected by malware (usually via malicious downloads or links).
+2] Malware monitors and steals login data as the user types it.
+3] Attacker uses the stolen info to log in and act as the user.
+Real-World Risk:
+ Stealing login credentials (username, password)
+ Performing fraudulent transactions
+ Accessing sensitive cloud data
+Countermeasures:
+ Limit access to cloud services using VPNs and IP whitelisting.
+ Use Intrusion Detection Systems (IDS) to catch unusual behavior.
+ Install strong anti-malware and antivirus tools.
+ Use Multi-Factor Authentication (MFA) for all users.
+
+17. Metadata Spoofing Attack
+Metadata spoofing is when an attacker changes cloud service metadata (the technical information that tells users how and where to access services).
+This metadata is stored in a WSDL file (Web Service Description Language), which acts like a map or guide for cloud services.
+Attackers edit or tamper with this WSDL file so that when users try to access a cloud service, they are redirected to a malicious location instead.
+Think of it like putting up a fake road sign so people drive to the wrong place.
+What can go wrong?
+ Users may unknowingly send their data to attackers.
+ Users may be redirected to fake or malicious services.
+ Attackers can steal or manipulate sensitive information.
+Countermeasures:
+ Encrypt application and service metadata so attackers can’t read or change it.
+ Use hash-based integrity checking – this ensures that the metadata hasn't been tampered with.
+ Turn off unused metadata services to reduce attack surfaces.
+ Use host-based firewalls to control and restrict access to the instance metadata API (which provides internal service info to apps).
+
+18. Cloud Malware Injection Attack
+This attack happens when an attacker uploads malicious software (like a fake app or service) into a cloud environment.
+The malware can be disguised as a virtual machine (VM), application, or service running in cloud platforms like SaaS, PaaS, or IaaS.
+When users use this fake service, the attacker can:
+ Steal data
+ Listen to communications (eavesdrop)
+ Modify or destroy information
+How it happens:
+1] Attacker creates a fake service or VM with harmful code.
+2] They upload it to the cloud pretending it’s a normal service.
+3] Cloud users unknowingly interact with the fake service.
+4] The malware steals or tampers with data, or listens in on user activity.
+What can go wrong?
+ Data theft or corruption
+ Unauthorized access
+ Cloud resources being misused
+Countermeasures :
+ Allow only verified and signed images/services to be uploaded or installed.
+ Use real-time malware scanners and cloud monitoring tools.
+ Keep strong identity and access controls (use multi-factor authentication).
+ Regularly scan cloud environments for abnormal behavior or unauthorized software.
+
+Cloud Malware: Hildegard
+
+What is it? :=> Hildegard is a cloud malware that targets Kubernetes clusters by exploiting misconfigured kubelets (components responsible for managing containers on each node).
+Once it enters the system, it spreads to all containers in the cluster and:
+ Hides its presence
+ Hijacks resources for crypto mining and attacks
+ Bypasses security monitoring
+What it does (Features):
+| Feature           | Description                                                        |
+| ----------------- | ------------------------------------------------------------------ |
+| Stealth Mode      | Hides malware processes using LD\_PRELOAD (a Linux trick)          |
+| Evades Detection  | Uses IRC agent called `ziggystartux` to avoid being flagged        |
+| Alters DNS        | Changes system DNS to bypass DNS monitoring tools                  |
+| Credential Theft  | Searches for passwords and keys to access more systems             |
+| Command & Control | Uses tmate and IRC channels to receive instructions from attackers |
+What can it do?
+ Crypto mining: Uses your cloud servers to mine cryptocurrency (without your permission).
+ DoS attacks: Overloads your servers to disrupt operations.
+ Application attacks: Can break or hijack your apps.
+ Spreads rapidly across the Kubernetes environment.
+How to protect your system:
+ Always secure and configure kubelets properly
+ Monitor containers for unexpected behavior
+ Use runtime protection tools and behavioral analytics
+ Restrict the use of tmate and IRC protocols
+ Apply least privilege access for containers and services
+ Regularly patch and update your Kubernetes setup
+
+Other Notable Cloud Malware
+| Malware Name            | What It Does                                                                                                                                |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
+| Denonia                 | Targets AWS Lambda for crypto mining using Go-based malware. Known as the first known Lambda-specific malware.                              |
+| LemonDuck               | Originally a Windows crypto miner, now expanded to Linux and cloud. Steals credentials, spreads through vulnerabilities, and drops malware. |
+| RansomCloud             | Encrypts cloud emails (like Office 365) and demands ransom. Often spreads via phishing.                                                     |
+| DBatLoader / ModiLoader | Loader malware used to deliver ransomware or steal data. Often hidden in malicious downloads or pirated software.                           |
+| Goldbackdoor            | A persistent and stealthy backdoor used to access cloud environments, steal data, and control infrastructure.                               |
 
 
 
