@@ -582,14 +582,95 @@ Effect: Instantly inherits group permissions.
    They can grant themselves admin access.
    View, modify, or delete all data in the bucket.
    Possibly pivot to other services using the elevated identity.
-
-
-
-
-
-
-
-
-
+ 28]Privilege Escalation in Google Cloud (GCP) via GCPBucketBrute
+  Misconfigured Google Cloud Storage (GCS) buckets can expose permissions publicly or to all GCP users. This opens the door for privilege escalation using tools like GCPBucketBrute.
+ Tool: [GCPBucketBrute](https://rhinosecuritylabs.com)
+ Steps:
+  Enumerate Buckets: Uses GCPBucketBrute to scan and identify accessible GCS buckets.
+  Check IAM Policy:
+    Sends request to: `https://www.googleapis.com/storage/v1/b/BUCKETNAME/iam`
+    If `allUsers` or `allAuthenticatedUsers` can read the policy, it returns data.
+  Test Permissions:
+    Uses TestIamPermissions API to enumerate allowed permissions for the user on the bucket.
+  Privilege Escalation Detection:
+    If a user has sufficient permissions (like `storage.buckets.setIamPolicy`), the tool flags the bucket as vulnerable to escalation.
+    Attacker may escalate their role to admin by modifying bucket IAM policies.
+ 29]Privilege Escalation in Microsoft Azure AD via Misconfigured Accounts
+ Misconfigured Azure AD user accounts can be escalated to Global Administrator using PowerShell and self-signed certificates.
+ Tools: AzureAD PowerShell Module, BloodHound / AzureHound
+ Steps:
+  Identify Normal User: Tools like **BloodHound/AzureHound** used to map out users and permissions.
+  Log into Azure AD:
+  Create Self-Signed Certificate:
+     ```powershell
+     $pwd = <password>
+     $path = <thumbprint>
+     Export-PfxCertificate -cert $path -FilePath <save_path.pfx> -Password $pwd
+     ```
+  Upload Certificate to Azure AD App.
+  Use Certificate to Authenticate:
+     ```powershell
+     Connect-AzureAD -TenantId <tenant_id> -ApplicationId <app_id> -CertificateThumbPrint <thumbprint>
+     ```
+  Assign Global Admin Role:
+     ```powershell
+     Add-AzureADDirectoryRoleMember -RefObjectId <normaluser_object ID> -ObjectId <Globaladmin_ID>
+     ```
+  Verify: Check Azure AD portal for escalated role.
+ 30]Creating Backdoor Accounts in AWS via Endgame and Pacu
+ An attacker with valid AWS API access can **create backdoor accounts by manipulating IAM policies or Resource Access Manager (RAM) settings.
+ Tools: [Endgame](https://github.com), [Pacu](https://github.com/RhinoSecurityLabs/pacu)
+ Steps:
+  Access IAM with Valid Credentials.
+  List Resources:
+   ```bash
+   endgame list-resources -s iam      # IAM only
+   endgame list-resources --service s3  # S3 buckets
+   endgame list-resources --service all  # All services
+   ```
+  Create Backdoor:
+   ```bash
+   endgame expose --service iam --name test-resource-exposure
+   ```
+  Establish Persistence:
+    Attackers use rogue accounts to persist access across reboots or policy changes.
+    Modify IAM roles or attach policies to give themselves `AdministratorAccess`.
+ 31] Backdooring Docker Images Using Dockerscan
+ Tool: [Dockerscan (GitHub)](https://github.com) – Docker hacking and analysis utility
+ Key Capabilities for Attackers:
+  Network Scanning:
+   Discover Docker registries exposed on a network.
+  Registry Manipulation:
+   Delete image/tags.
+   Push backdoored (malicious) images.
+   Upload arbitrary files to registries.
+  Sensitive Data Extraction:
+   Read environment variables to obtain: Passwords, URLs/IPs, Credentials
+  Image Trojanization: Modify image entrypoints, Inject reverse shells, Change the user context in Docker.
+ 32]Maintaining Access and Covering Tracks in AWS (CloudTrail Exploitation)
+ CloudTrail Overview:
+  AWS service that logs user activity for security audits and monitoring.
+  Often disabled by default, requiring manual setup.
+ Attacker Tactics After Gaining Admin Access:
+  Disabling Logging
+  Checking Trail Status
+  Restoring Logs Post-Attack
+  Permanent Log Removal Options
+ Deleting or pausing logs may trigger alerts from AWS Security Monitoring tools (e.g., GuardDuty).
+ Advanced Covering Tracks Techniques:
+  Encrypt logs with new KMS key (prevent access).
+  Move trails to a different S3 bucket.
+  Use Lambda functions to delete logs dynamically.
+ Persistence Techniques in AWS:
+  Modify user data on EC2 to run post-startup scripts (backdoors).
+  Spin up new EC2s with sensitive roles using modified AMIs.
+  Add backdoors into Lambda functions (e.g., creating IAM users).
+  Create/rotate access keys using hidden Lambda functions.
+ Defensive Takeaways:
+  Enable CloudTrail and enforce immutable logging.
+  Set up GuardDuty, CloudWatch alarms, and S3 versioning.
+  Monitor unusual IAM/Lambda/EC2 activity.
+  Use AWS Config rules to enforce baseline security policies.
+ 
 
 
