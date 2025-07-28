@@ -431,9 +431,157 @@ What Happens If Attackers Succeed?
   aws lambda list-functions
  Download Lambda code:
   aws lambda get-function --function-name corpFuncEasy
-
-
-
+ 21]Exploiting Shadow Admins in AWS
+ Shadow Admins are user accounts with unusual or indirect admin-level privileges. Attackers often exploit these accounts after gaining initial access to escalate privileges and take control of the cloud environment.
+ Common Exploitation Techniques:
+ 1)Elevating Access Permissions
+   Permission Abused: `Microsoft.Authorization/elevateAccess/Action`
+   Allows attackers to promote their access level to global administrator.
+2)Modifying Existing Roles
+   Permission Abused: `Microsoft.Authorization/roleDefinitions/write`
+   Enables attackers to edit roles and grant themselves admin access.
+3)Creating New Admin Accounts
+   Permission Abused: `Microsoft.Authorization/roleAssignments/write`
+   Attackers assign privileged roles to new or existing accounts.
+   Abusing custom roles like Storage Team Leader can also grant full control.
+ Shadow Admin Scanning Tools
+ | Tool Name  | Description                                                                |
+ | ---------- | -------------------------------------------------------------------------- |
+ | SkyArk     | Scans AWS & Azure for risky accounts. Modules: `AWStealth`, `AzureStealth` |
+ | Red-Shadow | Detects over-privileged IAM roles in cloud environments                    |
+ | ACLight2   | Scans Azure AD permissions and identifies shadow admins                    |
+ 22]Exploiting Docker Remote API
+ The Docker Remote API can be abused if exposed publicly or protected weakly, allowing attackers to interact with containers and the host system.
+ Common Attack Techniques:
+ 1)Retrieving Files from Docker Host
+ docker -H <Remote IP:Port> pull alpine
+ docker -H <Remote IP:Port> run -t -d alpine
+ docker -H <Remote IP:Port> exec <container_name> ls
+  Mounts volumes to access host directories.
+  Useful to extract sensitive configs or source code.
+ 2)Accessing External Mounts
+ docker inspect <container_name>
+  Reveals external storage mounts like S3, NFS.
+  Writable mounts can be manipulated or overwritten.
+ 3)Internal Network Scanning
+ docker -H <docker host> run --network=host --rm marsmensch/nmap -ox <IP Range>
+  Uses `nmap` from inside container to **scan the host’s LAN**.
+  Reveals reachable internal services.
+ 4)Retrieving Credentials
+ docker inspect <container_name>
+ docker exec -i <container_name> env
+  Reads environment variables (common place for passwords, tokens).
+ 5)Querying Databases
+ docker -H [docker host] ps | grep mysql
+ docker -H [docker host] exec -i some-mysql env
+ docker -H [docker host] exec -i some-mysql mysql -u root -p<password> -e "show databases"
+  Identifies MySQL containers.
+  Uses leaked creds to extract data.
+ 23]Hacking Container Volumes in Kubernetes
+ Kubernetes containers share volumes to manage filesystems. These volumes are like shared directories accessible to all containers in a pod. Kubernetes supports volume types like NFS and iSCSI.
+ Key Exploitable Volume Weaknesses:
+  Weak/default configurations can lead to privilege escalation and lateral movement.
+ Common Attack Vectors:
+ 1)Accessing Master Nodes:
+   Volumes like iSCSI store configs as Kubernetes Secrets.
+   If attackers access the API server or etcd, they can extract these secrets.
+ 2)Accessing Nodes:
+   Kubelet, which manages pods, allows attackers (with node access) to read all volumes used in the pod.
+   Using tools like `df`, attackers can identify mounted volumes and their sources (e.g., NFS).
+ 3)Accessing Containers:
+   From inside a container, attackers can:
+    Mount hostPath volumes to access node-level files.
+    Use filesystem tools to explore all mounted directories.
+ 24]CloudGoat 2 – AWS Exploitation Training Tool
+ CloudGoat 2 by Rhino Security Labs simulates vulnerable AWS environments for capture-the-flag (CTF) exercises.
+ Included Scenarios:
+  rce\_web\_app – Remote code execution (RCE) in a web app inside a VPC.
+  iam\_privesc\_by\_attachment – Attach instance profiles to escalate privileges.
+  iam\_privesc\_by\_rollback – Revert to previous IAM policy versions to gain elevated access.
+  codebuild\_secrets – Extract secrets from CodeBuild and SSM.
+  ec2\_ssrf – Exploit SSRF to extract AWS keys from EC2 metadata.
+ 25]Gaining Access via SSRF in AWS
+ Exploiting SSRF to Retrieve Credentials:
+  Vulnerable web applications allow SSRF attacks (e.g., via GET parameter `url`).
+  Attackers query [http://169.254.169.254/latest/meta-data/](http://169.254.169.254/latest/meta-data/) to extract IAM role credentials.
+ Using Stolen AWS Credentials:
+ 1)Configure local AWS CLI: aws configure --profile stolen_profile
+ 2)Verify access: aws sts get-caller-identity --profile stolen_profile
+ 3)List S3 buckets: aws s3 ls --profile stolen_profile
+ 4)Download bucket content: aws s3 sync s3://bucket-name /home/attacker/localstash/targetcloud/ --profile stolen_profile
+ 26]AWS IAM Privilege Escalation Techniques (by Rhino Security Labs)
+ Once attackers gain initial access to an AWS environment, they attempt to escalate privileges using various IAM (Identity and Access Management) tricks. Below are some common techniques:
+ 1)Create a New Policy Version
+  Required Permission: `iam:CreatePolicyVersion`
+  What happens: Attacker creates a new version of an existing IAM policy with admin-level permissions and   sets it as default.
+  Why it's dangerous: Even without `iam:SetDefaultPolicyVersion`, using `--set-as-default` flag while creating   lets them activate the malicious version immediately.
+ 2)Switch to an Older Policy Version
+  Required Permission: `iam:SetDefaultPolicyVersion`
+  What happens: If a policy has older versions with more privileges, attacker switches back to one of them.
+  Result: Instant privilege gain without creating anything new.
+ 3)Create EC2 Instance with Privileged Role
+  Required Permissions: `iam:PassRole`, `ec2:RunInstances`
+  What happens: Attacker spins up a new EC2 instance and attaches an existing IAM role (with high permissions).
+  Abuse: Use EC2 metadata service to get temporary credentials.
+ 4)Create New Access Key
+  Required Permission: `iam:CreateAccessKey`
+  What happens: Attacker generates new programmatic keys for an IAM user.
+  Result: Full access to APIs with the victim’s privileges.
+ 5)Create or Update Console Login Profile
+  Required Permissions: `iam:CreateLoginProfile`, `iam:UpdateLoginProfile`
+  What happens:
+   `CreateLoginProfile`: Attacker sets up a new password for console access.
+   `UpdateLoginProfile`: Attacker changes existing user’s password.
+  Danger: Enables access to AWS Management Console with elevated privileges.
+ 6)Attach Policy to User, Group, or Role
+ Required Permissions:
+  `iam:AttachUserPolicy`
+  `iam:AttachGroupPolicy`
+  `iam:AttachRolePolicy`
+  What happens: Attacker attaches high-privilege policies to users, groups, or roles to elevate their access.
+ 7)Create/Update Inline Policy
+ Required Permissions:
+   `iam:PutUserPolicy`
+   `iam:PutGroupPolicy`
+   `iam:PutRolePolicy`
+  What happens: Attacker injects inline policies directly into identities (users, groups, roles).
+  Impact: Often used to grant full `AdministratorAccess`.
+ 8)Add User to High-Privilege Group
+Required Permission: `iam:AddUserToGroup`
+What happens: Attacker adds themselves or a compromised user to a group with elevated access (e.g., `Admins`).
+Effect: Instantly inherits group permissions.
+ 27]Escalating Privileges of Google Storage Buckets using GCPBucketBrute
+ Google Cloud Storage (GCS) uses buckets to store data—similar to Amazon S3. If these buckets are misconfigured, they can become vulnerable to privilege escalation attacks. This typically occurs when IAM policies or Access Control Lists (ACLs) are too permissive.
+ Tool Used: GCPBucketBrute
+ GCPBucketBrute is a security tool designed to:
+  Enumerate Google Cloud buckets.
+  Test permissions on each bucket.
+  Identify if privilege escalation is possible.
+ Common Misconfiguration:
+  Buckets that allow `allUsers` (public) or `allAuthenticatedUsers` (any GCP user) to view IAM policies.
+  This exposes permission data that attackers can leverage.
+ How GCPBucketBrute Works:
+ 1)Bucket Policy Enumeration
+   The tool makes a request to:
+   `https://www.googleapis.com/storage/v1/b/BUCKETNAME/iam`
+    If accessible, it means the bucket's IAM policy is public.
+    If denied, permissions are restricted (as expected).
+ 2)Testing Bucket Permissions
+   It uses the `TestIamPermissions` API by providing:
+    Bucket name
+    List of GCS permissions (like `storage.objects.list`, `storage.buckets.update`, etc.)
+   If the request returns specific allowed permissions, the attacker knows what they can do.
+ 3)Privilege Escalation Check
+   GCPBucketBrute analyzes whether the permissions are sufficient to:
+    Modify bucket IAM policies,
+    Upload or delete sensitive files,
+    Add new roles or escalate to admin-level control.
+    If so, it flags the bucket as vulnerable to privilege escalation.
+ Real-World Impact
+  If attackers find a vulnerable bucket and escalate privileges:
+   They can grant themselves admin access.
+   View, modify, or delete all data in the bucket.
+   Possibly pivot to other services using the elevated identity.
 
 
 
